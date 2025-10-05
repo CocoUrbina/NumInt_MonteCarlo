@@ -1,0 +1,110 @@
+\documentclass{beamer}
+
+% ====================
+% TEMAS Y COLORES
+% ====================
+\usetheme{Madrid} % Tema base
+\usecolortheme{seahorse} % Paleta de colores
+\usefonttheme{professionalfonts}
+
+% Colores personalizados
+\definecolor{maincolor}{RGB}{0,90,150}
+\definecolor{secondary}{RGB}{200,40,40}
+
+\setbeamercolor{structure}{fg=maincolor} % títulos y bullets
+\setbeamercolor{frametitle}{fg=white,bg=maincolor}
+\setbeamercolor{title}{fg=white,bg=maincolor}
+\setbeamercolor{footline}{bg=maincolor, fg=white}
+
+% ====================
+% DATOS DE LA PRESENTACIÓN
+% ====================
+\title[Fisica Computacional]{Aceleracion de la tecnica de Monte Carlo para integracion numerica usando memoria compartida y memoria distribuida}
+%\subtitle{Plantilla personalizada en Overleaf}
+\author[]{Edwin Urbina Quiroz\\
+Ervin Villalta Caceres\\
+Isao Nunez Okubo
+}
+\institute{Universidad de Costa Rica}
+\date{\today}
+
+% Logo (opcional, coloca tu archivo logo.png en el proyecto Overleaf)
+% \titlegraphic{\includegraphics[width=2cm]{logo.png}}
+
+% ====================
+% PIE DE PÁGINA
+% ====================
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.7\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\hspace{2mm}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshorttitle \hspace{2mm}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Quitar barra de navegación
+\setbeamertemplate{navigation symbols}{}
+
+\begin{document}
+
+% ====================
+% PORTADA
+% ====================
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% ====================
+% TABLA DE CONTENIDOS
+% ====================
+\begin{frame}{Contenido}
+  \tableofcontents
+\end{frame}
+
+% ====================
+\section{Introducción}
+% ====================
+
+\begin{frame}{¿Qué es Beamer?}
+  \begin{itemize}
+    \item Clase de \LaTeX{} para presentaciones
+    \item Alternativa profesional a PowerPoint
+    \item Permite personalización con temas y colores
+  \end{itemize}
+\end{frame}
+
+% ====================
+\section{Ejemplo}
+% ====================
+
+\begin{frame}{Un ejemplo matemático}
+  \[
+    \int_0^\infty e^{-x^2}\, dx = \frac{\sqrt{\pi}}{2}
+  \]
+\end{frame}
+
+% ====================
+\section{Cierre}
+% ====================
+
+\begin{frame}{Conclusiones}
+  \begin{block}{Lo que aprendimos}
+    \begin{itemize}
+      \item Cómo usar Beamer en Overleaf
+      \item Personalizar colores, pie de página y portada
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Gracias}
+  \centering
+  ¡Preguntas?  
+  \vfill
+  %\includegraphics[width=1.5cm]{logo.png}
+\end{frame}
+
+\end{document}
