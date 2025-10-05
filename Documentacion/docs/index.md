@@ -1,4 +1,4 @@
-# Bienvenidos.
+# Bienvenidos
 
 ## Autores
 Edwin Urbina Quiroz | A76588
