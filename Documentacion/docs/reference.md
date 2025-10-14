@@ -1,1 +1,3 @@
-::: MonteCarlo.MonteCarlo
+Aqui va la documentacion
+
+En C++ se hace a pie.
