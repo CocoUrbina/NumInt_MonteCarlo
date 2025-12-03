@@ -16,13 +16,13 @@ Los detalles conceptuales se amplían en la sección **Explanation**, los ejempl
 La integración con los métodos de Monte Carlo constituye un pilar de las técnicas de matemáticas aplicadas.  
 La idea corresponde a estimar el **valor medio** de una función para aproximar una integral usando números aleatorios.
 
-Considere la integral definida en el intervalo \([a,b]\):
+Considere la integral definida en el intervalo $[a,b]$:
 
 $$
 I = \int_a^b f(x)\,dx.
 $$
 
-El valor promedio o valor medio de la función \(f\) se define mediante
+El valor promedio o valor medio de la función $f$ se define mediante
 
 $$
 \langle f \rangle = \frac{1}{b-a} \int_a^b f(x)\,dx
@@ -42,7 +42,7 @@ $$
 I = \frac{b-a}{N} \sum_{i=1}^{N} f(x_i),
 $$
 
-donde los \(x_i\) son números pseudoaleatorios en el intervalo \([a,b]\).  
+donde los $x_i$ son números pseudoaleatorios en el intervalo $a,b$.  
 La técnica de Monte Carlo es particularmente poderosa para evaluar integrales en **muchas dimensiones**, ya que el costo crece de forma más suave que en los métodos deterministas tradicionales.
 
 ---
@@ -50,7 +50,7 @@ La técnica de Monte Carlo es particularmente poderosa para evaluar integrales e
 ## Objetivos del proyecto (Milestones)
 
 - Emplear la técnica de Monte Carlo de punto medio para evaluar una integral multidimensional.
-- Estudiar el error como función de \(N\) para comprobar la escalabilidad del método.
+- Estudiar el error como función de $N$ para comprobar la escalabilidad del método.
 - Utilizar el paralelismo de **memoria compartida** para acelerar el procedimiento.
 - Utilizar el paralelismo de **memoria distribuida** para acelerar el procedimiento.
 - Evaluar la **escalabilidad** en cada caso y comparar los resultados.
