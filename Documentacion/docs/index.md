@@ -1,23 +1,65 @@
-# Bienvenidos
+# Numerical Integration Monte Carlo
 
-## Autores
-Edwin Urbina Quiroz | A76588
+Este proyecto implementa y acelera la integración numérica mediante el método de **Monte Carlo**, usando:
 
-Ervin Villalta Cáceres | C38490
+- **Memoria compartida** (paralelismo en un solo nodo).
+- **Memoria distribuida** (paralelismo entre varios nodos o procesos).
+- Integrales **multidimensionales** y estudio del **error numérico**.
 
-Isao Núñez Okubo | C35619
+En esta página se presenta la motivación general y la formulación básica del método.  
+Los detalles conceptuales se amplían en la sección **Explanation**, los ejemplos paso a paso en **Tutorials** y la documentación de funciones en **Reference**.
 
-## Introducción y descripción del problema
+---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus convallis eu mauris in mollis. Aenean porta dictum lorem a convallis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam iaculis non nunc non dignissim. Praesent eu dui eu metus scelerisque aliquam. Maecenas varius sit amet diam quis lobortis. Nulla congue hendrerit magna, quis sollicitudin tellus varius a. Nam auctor quam et accumsan gravida. Vivamus ultricies neque elit, in rutrum dui scelerisque quis. Phasellus eget odio fringilla, finibus justo eget, ullamcorper nisi. Donec et ligula vel est gravida finibus id ac nibh. Integer id tincidunt nisi, vel elementum mauris. Quisque lobortis odio tortor. Integer imperdiet in nisi vitae interdum. Etiam condimentum tortor ex, ullamcorper consectetur ante venenatis in. Duis urna odio, vulputate et ante volutpat, euismod tempus arcu. 
+## Integración numérica con Monte Carlo
 
-## Project layout
+La integración con los métodos de Monte Carlo constituye un pilar de las técnicas de matemáticas aplicadas.  
+La idea corresponde a estimar el **valor medio** de una función para aproximar una integral usando números aleatorios.
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md         # Homepage de la documentacion.
-        explanation.md   # Descripcion del metodo usado.
-        tutorials.md     # Ejemplos de uso
-        reference.md     # Documentacion de las funciones usadas.
-    MonteCarlo/
-        MonteCarlo.py    # Implementacion de las funciones.
+Considere la integral definida en el intervalo \([a,b]\):
+
+$$
+I = \int_a^b f(x)\,dx.
+$$
+
+El valor promedio o valor medio de la función \(f\) se define mediante
+
+$$
+\langle f \rangle = \frac{1}{b-a} \int_a^b f(x)\,dx
+$$
+
+y, por lo tanto,
+
+$$
+I = \langle f \rangle (b-a).
+$$
+
+La idea del método de Monte Carlo es estimar \(\langle f \rangle\) usando \(N\) números pseudoaleatorios, mediante la aproximación
+
+$$
+\langle f \rangle \approx \frac{1}{N} \sum_{i=1}^{N} f(x_i)
+\quad \Longrightarrow \quad
+I = \frac{b-a}{N} \sum_{i=1}^{N} f(x_i),
+$$
+
+donde los \(x_i\) son números pseudoaleatorios en el intervalo \([a,b]\).  
+La técnica de Monte Carlo es particularmente poderosa para evaluar integrales en **muchas dimensiones**, ya que el costo crece de forma más suave que en los métodos deterministas tradicionales.
+
+---
+
+## Objetivos del proyecto (Milestones)
+
+- Emplear la técnica de Monte Carlo de punto medio para evaluar una integral multidimensional.
+- Estudiar el error como función de \(N\) para comprobar la escalabilidad del método.
+- Utilizar el paralelismo de **memoria compartida** para acelerar el procedimiento.
+- Utilizar el paralelismo de **memoria distribuida** para acelerar el procedimiento.
+- Evaluar la **escalabilidad** en cada caso y comparar los resultados.
+
+---
+
+## Navegación
+
+- **Explanation**: detalle teórico del método, derivaciones y consideraciones numéricas.
+- **Tutorials**: ejemplos completos de uso, desde casos simples hasta integrales multidimensionales.
+- **Reference**: API y descripción formal de las funciones e interfaces del código.
+
