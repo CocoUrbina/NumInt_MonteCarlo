@@ -15,16 +15,19 @@
         <link rel="next" href="../reference/">
       
       
+        
+      
+      
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>Explanation - Numerical Integration Monte Carlo</title>
+        <title>Explanation — Numerical Integration with Monte Carlo - Numerical Integration Monte Carlo</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.2a3383ac.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
       
       
 
@@ -51,7 +54,6 @@
 
     
     
-    
   </head>
   
   
@@ -62,6 +64,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#explanation-numerical-integration-with-monte-carlo" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -95,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Explanation
+              Explanation — Numerical Integration with Monte Carlo
             
           </span>
         </div>
@@ -156,9 +163,14 @@
   
   
   <span class="md-ellipsis">
-    Bienvenidos
+    
+  
+    Numerical Integration Monte Carlo
+  
+
     
   </span>
+  
   
 
       </a>
@@ -179,18 +191,222 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explanation — Numerical Integration with Monte Carlo
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    Explanation
+    
+  
+    Explanation — Numerical Integration with Monte Carlo
+  
+
     
   </span>
   
+  
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-motivacion-del-metodo-de-monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Motivación del método de Monte Carlo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-fundamento-matematico-integral-como-valor-esperado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Fundamento matemático: integral como valor esperado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-convergencia-del-metodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Convergencia del método
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-funcion-objetivo-utilizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Función objetivo utilizada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-generacion-de-numeros-aleatorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Generación de números aleatorios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-estructura-general-del-algoritmo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Estructura general del algoritmo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-sobre-las-dos-versiones-del-codigo-usadas-en-el-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Sobre las dos versiones del código usadas en el proyecto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Sobre las dos versiones del código usadas en el proyecto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-codigo-estatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (1) Código estático
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-codigo-interactivo-parsing-de-argumentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (2) Código interactivo (parsing de argumentos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cual-version-debe-describirse-en-esta-seccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cuál versión debe describirse en esta sección?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-seccion-reservada-paralelismo-con-memoria-compartida-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Sección reservada: paralelismo con memoria compartida (OpenMP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-seccion-reservada-paralelismo-con-memoria-distribuida-mpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Sección reservada: paralelismo con memoria distribuida (MPI)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-seccion-reservada-analisis-de-escalabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Sección reservada: análisis de escalabilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-conclusion-conceptual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Conclusión conceptual
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -208,9 +424,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Reference
+  
+
     
   </span>
+  
   
 
       </a>
@@ -230,9 +451,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Tutorials
+  
+
     
   </span>
+  
   
 
       </a>
@@ -257,6 +483,176 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-motivacion-del-metodo-de-monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Motivación del método de Monte Carlo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-fundamento-matematico-integral-como-valor-esperado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Fundamento matemático: integral como valor esperado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-convergencia-del-metodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Convergencia del método
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-funcion-objetivo-utilizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Función objetivo utilizada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-generacion-de-numeros-aleatorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Generación de números aleatorios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-estructura-general-del-algoritmo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Estructura general del algoritmo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-sobre-las-dos-versiones-del-codigo-usadas-en-el-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Sobre las dos versiones del código usadas en el proyecto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Sobre las dos versiones del código usadas en el proyecto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-codigo-estatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (1) Código estático
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-codigo-interactivo-parsing-de-argumentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (2) Código interactivo (parsing de argumentos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cual-version-debe-describirse-en-esta-seccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cuál versión debe describirse en esta sección?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-seccion-reservada-paralelismo-con-memoria-compartida-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Sección reservada: paralelismo con memoria compartida (OpenMP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-seccion-reservada-paralelismo-con-memoria-distribuida-mpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Sección reservada: paralelismo con memoria distribuida (MPI)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-seccion-reservada-analisis-de-escalabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Sección reservada: análisis de escalabilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-conclusion-conceptual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Conclusión conceptual
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -266,15 +662,213 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
 
 
 
-  <h1>Explanation</h1>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus convallis eu mauris in mollis. Aenean porta dictum lorem a convallis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam iaculis non nunc non dignissim. Praesent eu dui eu metus scelerisque aliquam. Maecenas varius sit amet diam quis lobortis. Nulla congue hendrerit magna, quis sollicitudin tellus varius a. Nam auctor quam et accumsan gravida. Vivamus ultricies neque elit, in rutrum dui scelerisque quis. Phasellus eget odio fringilla, finibus justo eget, ullamcorper nisi. Donec et ligula vel est gravida finibus id ac nibh. Integer id tincidunt nisi, vel elementum mauris. Quisque lobortis odio tortor. Integer imperdiet in nisi vitae interdum. Etiam condimentum tortor ex, ullamcorper consectetur ante venenatis in. Duis urna odio, vulputate et ante volutpat, euismod tempus arcu. </p>
+<h1 id="explanation-numerical-integration-with-monte-carlo">Explanation — Numerical Integration with Monte Carlo</h1>
+<p>Este documento presenta el fundamento matemático, computacional y conceptual del proyecto.<br />
+Aquí se explica el método de Monte Carlo, su convergencia, la función utilizada, la estructura general del algoritmo, y se señalan los apartados donde se integrarán las extensiones del proyecto relacionadas con <strong>memoria compartida</strong>, <strong>memoria distribuida</strong> y <strong>escalabilidad paralela</strong>.</p>
+<hr />
+<h2 id="1-motivacion-del-metodo-de-monte-carlo">1. Motivación del método de Monte Carlo</h2>
+<p>La integración numérica tradicional (trapecio, Simpson, cuadraturas gaussianas) escala de forma muy pobre con la dimensión del espacio.<br />
+Si se quiere calcular</p>
+<div class="arithmatex">\[
+I = \int_{\Omega} f(\mathbf{x}) \, d\mathbf{x},
+\]</div>
+<p>y <span class="arithmatex">\(\Omega\)</span> es un dominio <span class="arithmatex">\(d\)</span>-dimensional, los métodos deterministas requieren una cantidad de puntos proporcional a <span class="arithmatex">\(N^d\)</span> (fenómeno conocido como <em>curse of dimensionality</em>).</p>
+<p>Monte Carlo evita esta explosión combinatoria mediante el uso de <strong>muestras aleatorias</strong>, lo que permite que el error dependa principalmente de la cantidad de puntos y <strong>no</strong> de la dimensión.</p>
+<hr />
+<h2 id="2-fundamento-matematico-integral-como-valor-esperado">2. Fundamento matemático: integral como valor esperado</h2>
+<p>Consideremos un hipercubo <span class="arithmatex">\([a,b]^d\)</span> y definamos su volumen como</p>
+<div class="arithmatex">\[
+V = (b - a)^d.
+\]</div>
+<p>Si <span class="arithmatex">\(\mathbf{X}\)</span> es un vector aleatorio uniforme en dicho dominio, entonces la integral puede reescribirse como:</p>
+<div class="arithmatex">\[
+I = \int_{[a,b]^d} f(\mathbf{x})\,d\mathbf{x} = V \, \mathbb{E}[f(\mathbf{X})].
+\]</div>
+<p>Por lo tanto, si tomamos <span class="arithmatex">\(N\)</span> muestras independientes <span class="arithmatex">\(\mathbf{X}_1, \ldots, \mathbf{X}_N\)</span>, podemos estimar:</p>
+<div class="arithmatex">\[
+\hat{I}_N = V \frac{1}{N} \sum_{i=1}^{N} f(\mathbf{X}_i).
+\]</div>
+<p>Esta fórmula es la base del código utilizado.</p>
+<hr />
+<h2 id="3-convergencia-del-metodo">3. Convergencia del método</h2>
+<p>Una propiedad clave de Monte Carlo es que el error decrece según:</p>
+<div class="arithmatex">\[
+\Delta I \sim O(N^{-1/2}),
+\]</div>
+<p>sin importar la dimensión <span class="arithmatex">\(d\)</span>.<br />
+Esto hace al método muy atractivo para integrales de alta dimensión.</p>
+<p>En la práctica, el error se estima como:</p>
+<div class="arithmatex">\[
+\Delta I = V \sqrt{\frac{\sigma^2}{N}},
+\]</div>
+<p>donde</p>
+<div class="arithmatex">\[
+\sigma^2 = \mathbb{E}[f^2] - (\mathbb{E}[f])^2.
+\]</div>
+<p>En el programa, se calcula esto mediante:</p>
+<ul>
+<li><code>suma_final</code> → aproximación de <span class="arithmatex">\(\mathbb{E}[f]\)</span>  </li>
+<li><code>suma_final2</code> → aproximación de <span class="arithmatex">\(\mathbb{E}[f^2]\)</span></li>
+</ul>
+<hr />
+<h2 id="4-funcion-objetivo-utilizada">4. Función objetivo utilizada</h2>
+<p>Para las pruebas se escogió:</p>
+<div class="arithmatex">\[
+f(\mathbf{x}) = \exp\left(-\sum_{i=1}^d x_i^2\right),
+\]</div>
+<p>una función suave que aparece en:</p>
+<ul>
+<li>probabilidad multivariada,  </li>
+<li>física estadística,  </li>
+<li>integrales gaussianas de alta dimensión.</li>
+</ul>
+<p>Es ideal para evaluar el rendimiento del método.</p>
+<hr />
+<h2 id="5-generacion-de-numeros-aleatorios">5. Generación de números aleatorios</h2>
+<p>El proyecto utiliza el generador <strong>MT19937 (Mersenne Twister)</strong> por su alta calidad estadística.</p>
+<p>Una coordenada uniforme entre 0 y 1 se genera como:</p>
+<pre><code class="language-cpp">double r = double(generador()) / double(generador.max());
+</code></pre>
+<p>Luego se escala al intervalo arbitrario <span class="arithmatex">\([a,b]\)</span> mediante:</p>
+<div class="arithmatex">\[
+x_i = a + (b - a) r.
+\]</div>
+<p>Este proceso se repite para cada dimensión y para cada punto de integración.</p>
+<hr />
+<h2 id="6-estructura-general-del-algoritmo">6. Estructura general del algoritmo</h2>
+<p>El algoritmo implementado sigue los pasos clásicos del método de Monte Carlo:</p>
+<ol>
+<li>Elegir los parámetros del problema:<br />
+   número de puntos <span class="arithmatex">\(N\)</span>, número de dimensiones <span class="arithmatex">\(d\)</span>, y límites del dominio.</li>
+<li>Inicializar el generador pseudoaleatorio (MT19937).</li>
+<li>Para cada iteración <span class="arithmatex">\(i = 1, \ldots, N\)</span>:</li>
+<li>Generar un punto <span class="arithmatex">\(\mathbf{X}_i\)</span> en dimensión <span class="arithmatex">\(d\)</span>.  </li>
+<li>Evaluar la función objetivo <span class="arithmatex">\(f(\mathbf{X}_i)\)</span>.  </li>
+<li>Acumular <span class="arithmatex">\(f(\mathbf{X}_i)\)</span> y <span class="arithmatex">\(f(\mathbf{X}_i)^2\)</span>.</li>
+<li>Calcular:  </li>
+<li>el valor medio aproximado <span class="arithmatex">\(\hat{f}\)</span>,  </li>
+<li>la varianza aproximada <span class="arithmatex">\(\hat{\sigma}^2\)</span>,  </li>
+<li>la integral estimada <span class="arithmatex">\(\hat{I}_N\)</span>,  </li>
+<li>y el error estadístico asociado.</li>
+<li>Imprimir los resultados.</li>
+</ol>
+<p>El estimador final toma la forma:</p>
+<div class="arithmatex">\[
+\hat{I}_N = V \, \hat{f},
+\]</div>
+<p>donde <span class="arithmatex">\(V\)</span> es el volumen del dominio de integración.</p>
+<hr />
+<h2 id="7-sobre-las-dos-versiones-del-codigo-usadas-en-el-proyecto">7. Sobre las dos versiones del código usadas en el proyecto</h2>
+<p>El proyecto contiene dos implementaciones del mismo algoritmo:</p>
+<h3 id="1-codigo-estatico">(1) Código estático</h3>
+<p>En esta versión, los parámetros están fijados dentro del programa:</p>
+<pre><code class="language-cpp">int N = 10000000;
+int dimensiones = 3;
+double lim_inf = 0.0;
+double lim_sup = 1.0;
+</code></pre>
+<p>Este enfoque es útil para pruebas rápidas, reproducibilidad y debugging inicial.</p>
+<hr />
+<h3 id="2-codigo-interactivo-parsing-de-argumentos">(2) Código interactivo (parsing de argumentos)</h3>
+<p>Esta versión permite al usuario especificar los valores directamente desde la línea de comandos:</p>
+<p>./mc --li 0 --ls 1 --d 3 --n 10000000</p>
+<p>Esto se maneja mediante:</p>
+<pre><code class="language-cpp">if (argc != 9) {
+    std::cerr &lt;&lt; &quot;Usage: ...&quot; &lt;&lt; std::endl;
+    exit(1);
+}
+</code></pre>
+<p>y posterior extracción con <code>atof()</code> y <code>atoi()</code>.</p>
+<p>La ventaja del enfoque interactivo es que permite realizar múltiples experimentos sin re-compilar el programa.</p>
+<hr />
+<h3 id="cual-version-debe-describirse-en-esta-seccion">¿Cuál versión debe describirse en esta sección?</h3>
+<p>Ambas implementaciones realizan el mismo método numérico.<br />
+En <strong>Explanation.md</strong> debe explicarse:</p>
+<ul>
+<li>el método matemático,  </li>
+<li>el flujo general del algoritmo,  </li>
+<li>las ideas principales.</li>
+</ul>
+<p>Los detalles sobre el uso de argumentos deben documentarse en:</p>
+<ul>
+<li><code>tutorials.md</code> (uso práctico),  </li>
+<li><code>reference.md</code> (API e interfaz del programa).</li>
+</ul>
+<hr />
+<h2 id="8-seccion-reservada-paralelismo-con-memoria-compartida-openmp">8. Sección reservada: paralelismo con memoria compartida (OpenMP)</h2>
+<blockquote>
+<p><strong>Esta sección se completará cuando se integre el código paralelo.</strong></p>
+</blockquote>
+<p>Aquí debe incluirse:</p>
+<ul>
+<li>El concepto de dividir el ciclo Monte Carlo entre múltiples hilos.  </li>
+<li>Cómo funciona una cláusula <code>reduction(+:suma_final, suma_final2)</code>.  </li>
+<li>Problemas de condiciones de carrera y reproducibilidad.  </li>
+<li>Límites prácticos del speedup debido a saturación de núcleos.</li>
+</ul>
+<p>Lo que NO debe incluirse aquí:</p>
+<ul>
+<li>Código completo de OpenMP.  </li>
+<li>Benchmarking detallado.  </li>
+<li>Flags de compilación.</li>
+</ul>
+<hr />
+<h2 id="9-seccion-reservada-paralelismo-con-memoria-distribuida-mpi">9. Sección reservada: paralelismo con memoria distribuida (MPI)</h2>
+<blockquote>
+<p><strong>Esta sección se completará cuando se implemente MPI.</strong></p>
+</blockquote>
+<p>Aquí debe explicarse:</p>
+<ul>
+<li>Cómo se divide el trabajo total <span class="arithmatex">\(N\)</span> entre procesos independientes.  </li>
+<li>Cómo cada proceso computa su estimador parcial:<br />
+<span class="arithmatex">\(<span class="arithmatex">\(\hat{f}_p = \frac{1}{N_p}\sum_{i=1}^{N_p} f(\mathbf{X}_{i,p})\)</span>\)</span>  </li>
+<li>Cómo se combinan los resultados mediante <code>MPI_Reduce</code> o <code>MPI_Allreduce</code>.  </li>
+<li>Cómo influyen latencia y ancho de banda en el rendimiento.</li>
+</ul>
+<p>NO incluir aquí:</p>
+<ul>
+<li>Código de MPI,  </li>
+<li>Tablas de resultados,  </li>
+<li>Scripts de ejecución.</li>
+</ul>
+<hr />
+<h2 id="10-seccion-reservada-analisis-de-escalabilidad">10. Sección reservada: análisis de escalabilidad</h2>
+<blockquote>
+<p><strong>Aquí se incluirá el análisis después de realizar las pruebas paralelas.</strong></p>
+</blockquote>
+<p>Debe contener:</p>
+<ul>
+<li>Speedup:<br />
+<span class="arithmatex">\(<span class="arithmatex">\(S(p) = \frac{T(1)}{T(p)}\)</span>\)</span>  </li>
+<li>Eficiencia:<br />
+<span class="arithmatex">\(<span class="arithmatex">\(E(p) = \frac{S(p)}{p}\)</span>\)</span>  </li>
+<li>Discusión sobre por qué Monte Carlo escala bien.  </li>
+<li>Comparación entre memoria compartida vs. distribuida.  </li>
+<li>Impacto del costo de comunicación en MPI.</li>
+</ul>
+<p>NO debe incluir:</p>
+<ul>
+<li>Tablas crudas,  </li>
+<li>Código repetido,  </li>
+<li>Gráficos directos (pueden ir en sección aparte).</li>
+</ul>
+<hr />
+<h2 id="11-conclusion-conceptual">11. Conclusión conceptual</h2>
+<p>El método de Monte Carlo provee:</p>
+<ul>
+<li>simplicidad en implementación,  </li>
+<li>independencia del error respecto a la dimensión,  </li>
+<li>facilidad para paralelizar,  </li>
+<li>control estadístico del error.</li>
+</ul>
+<p>Las dos versiones del código (estática e interactiva) brindan flexibilidad tanto para pruebas internas como para experimentación en entornos paralelos.</p>
 
 
 
@@ -323,10 +917,11 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
         <script src="../javascripts/mathjax.js"></script>
       
