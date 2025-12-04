@@ -99,14 +99,4 @@ En código:
 double varianza = promedio_cuadrado - promedio * promedio;
 ```
 
-------------------------------------------------------------------------
-
-## Impresión final
-
-El programa muestra:
-
--   integral estimada\
--   error\
--   varianza\
--   escala del error
 
