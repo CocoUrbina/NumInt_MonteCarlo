@@ -4,16 +4,16 @@ Este documento explica cómo ejecutar, modificar y acelerar el programa de integ
 
 ---
 
-# 1. Versión secuencial con parámetros internos (MonteCarlo.cpp)
+# 1. Versión secuencial con parámetros internos (MonteCarlo2.cpp)
 
 ## Compilación
 ```bash
-g++ -O3 -std=c++17 MonteCarlo.cpp -o MonteCarlo
+g++ -O3 -std=c++17 MonteCarlo2.cpp -o MonteCarlo2
 ```
 
 ## Ejecución
 ```bash
-./MonteCarlo
+./MonteCarlo2
 ```
 
 ## Experimentos sugeridos (Milestone 1)
@@ -27,23 +27,23 @@ g++ -O3 -std=c++17 MonteCarlo.cpp -o MonteCarlo
 
 ---
 
-# 2. Versión secuencial con argumentos (MonteCarlo2.cpp)
+# 2. Versión secuencial con argumentos (MonteCarlo.cpp)
 
 ## Compilación
 ```bash
-g++ -O3 -std=c++17 MonteCarlo2.cpp -o MonteCarlo2
+g++ -O3 -std=c++17 MonteCarlo.cpp -o MonteCarlo
 ```
 
 ## Ejecución
 ```bash
-./MonteCarlo2 --li <lim_inf> --ls <lim_sup> --d <dim> --n <puntos>
+./MonteCarlo --li <lim_inf> --ls <lim_sup> --d <dim> --n <puntos>
 ```
 
 ## Ejemplos
 ```bash
-./MonteCarlo2 --li 0 --ls 1 --d 3 --n 10000
-./MonteCarlo2 --li 0 --ls 1 --d 3 --n 100000
-./MonteCarlo2 --li 0 --ls 1 --d 3 --n 1000000
+./MonteCarlo --li 0 --ls 1 --d 3 --n 10000
+./MonteCarlo --li 0 --ls 1 --d 3 --n 100000
+./MonteCarlo --li 0 --ls 1 --d 3 --n 1000000
 ```
 
 ## Estudio del error (Milestone 2)
