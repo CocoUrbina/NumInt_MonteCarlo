@@ -269,11 +269,11 @@ La sección relevante del código es:
     double suma_final = 0.0;
     double suma_final2 = 0.0;
     double time_1 = omp_get_wtime();
-    int num_procs = 1;
+    int num_procs;
 
     #pragma omp parallel
     {
-        int tid = omp_get_thread_num();
+        int num_procs = omp_get_thread_num();
 
         // Semilla distinta por hilo
         std::mt19937 generador(seed + tid * 7919);
@@ -305,7 +305,7 @@ Puntos clave:
 
 - `#pragma omp parallel` crea un grupo de hilos que ejecutan el mismo bloque.  
 - Cada hilo obtiene su identificador con `omp_get_thread_num()`.  
-- La semilla se ajusta por hilo (`seed + tid * 7919`) para generar secuencias independientes.  
+- La semilla se ajusta por hilo (`seed + num_procs * 7919`) para generar secuencias independientes.  
 - La directiva `#pragma omp single` asegura que solo un hilo ejecute `num_procs = omp_get_num_threads();`.  
 - `#pragma omp for reduction(+: suma_final, suma_final2)` reparte las iteraciones del bucle `for (int i = 0; i < N; i++)` entre los hilos, acumulando de manera segura las sumas en las variables globales mediante una reducción.
 
