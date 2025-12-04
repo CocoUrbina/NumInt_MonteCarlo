@@ -17,6 +17,7 @@ double func(const std::vector<double>& punto) {
 
 int main(int argc, char* argv[]) {
 
+    // Verificación de parámetros ingresados por el usuario
     if(argc != 9){
         std::cerr << "Usage: " << argv[0] << " --li [límite inferior] --ls [límite superior] --d [número de dimensiones] --n [cantidad de puntos]" << std::endl;
         exit(1);
@@ -24,7 +25,7 @@ int main(int argc, char* argv[]) {
 
     }
 
-    //Parámetros elegidos por el usuario
+    // Parámetros elegidos por el usuario
     double lim_inf, lim_sup;
 
     lim_inf = atof(argv[2]);
@@ -43,19 +44,26 @@ int main(int argc, char* argv[]) {
     double suma_final2 = 0.0;  // Para calcular varianza
     double time_1 = omp_get_wtime();
     int num_procs;
-    //Apertura del scope paralelo
+
+    // Apertura del scope paralelo
     #pragma omp parallel
     {
 
     // Generador Mersenne Twister
     std::mt19937 generador(seed);
+
+    // Inicialización de punto multidimencional
     std::vector<double> punto(dimensiones);
+
+    // Variable para obtener número de hilos
     num_procs = omp_get_num_threads();
-    //Paralelización del for
+
+    // Paralelización del for y reducción de sumas locales a sumas globales
     #pragma omp for reduction (+: suma_final, suma_final2)
+
     // Bucle principal de Monte Carlo
     for (int i = 0; i < N; i++) {
-        // Generar punto multidimensional (creo que es mejor evitar traer uniform... del std library?
+        // Generar punto multidimensional
         for (int d = 0; d < dimensiones; d++) {
             // Generar número uniforme entre 0 y 1 manualmente
             double r = double(generador()) / 
