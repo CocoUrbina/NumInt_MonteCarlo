@@ -100,7 +100,7 @@ Una coordenada uniforme entre 0 y 1 se genera como:
 
 ```cpp
 double r = double(generador()) / double(generador.max());
-
+```
 
 
 Luego se escala al intervalo arbitrario $[a,b]$ mediante:
@@ -148,12 +148,12 @@ El proyecto contiene dos implementaciones del mismo algoritmo:
 ### (1) Código estático
 
 En esta versión, los parámetros están fijados dentro del programa:
-
+```cpp
 int N = 10000000;
 int dimensiones = 3;
 double lim_inf = 0.0;
 double lim_sup = 1.0;
-
+```
 Este enfoque es útil para pruebas rápidas, reproducibilidad y debugging inicial.
 
 ---
@@ -165,12 +165,12 @@ Esta versión permite al usuario especificar los valores directamente desde la l
 ./mc --li 0 --ls 1 --d 3 --n 10000000
 
 Esto se maneja mediante:
-
+```cpp
 if (argc != 9) {
     std::cerr << "Usage: ..." << std::endl;
     exit(1);
 }
-
+```
 y posterior extracción con `atof()` y `atoi()`.
 
 La ventaja del enfoque interactivo es que permite realizar múltiples experimentos sin re-compilar el programa.
