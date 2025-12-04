@@ -19,11 +19,11 @@
 % ====================
 % DATOS DE LA PRESENTACIÓN
 % ====================
-\title[Fisica Computacional]{Aceleracion de la tecnica de Monte Carlo para integracion numerica usando memoria compartida y memoria distribuida}
+\title[Física Computacional]{Aceleración de la técnica de Monte Carlo para integración numérica usando memoria compartida y memoria distribuida}
 %\subtitle{Plantilla personalizada en Overleaf}
 \author[]{Edwin Urbina Quiroz\\
-Ervin Villalta Caceres\\
-Isao Nunez Okubo
+Ervin Villalta Cáceres\\
+Isao Núñez Okubo
 }
 \institute{Universidad de Costa Rica}
 \date{\today}
@@ -69,42 +69,467 @@ Isao Nunez Okubo
 \section{Introducción}
 % ====================
 
-\begin{frame}{¿Qué es Beamer?}
+\begin{frame}{Motivación del proyecto}
   \begin{itemize}
-    \item Clase de \LaTeX{} para presentaciones
-    \item Alternativa profesional a PowerPoint
-    \item Permite personalización con temas y colores
+    \item La integración numérica tradicional se vuelve muy costosa en altas dimensiones.
+    \item La técnica de Monte Carlo reduce este costo usando muestreo aleatorio.
+    \item Objetivo del proyecto:
+      \begin{itemize}
+        \item Implementar la integración de Monte Carlo multidimensional.
+        \item Acelerar el método usando memoria compartida y memoria distribuida.
+        \item Estudiar la escalabilidad del método.
+      \end{itemize}
+    \item Nota: en clase se vio una versión de ``Monte Carlo de punto medio'', pero en el proyecto se implementa la variante estándar por muestreo uniforme directo, que es la adecuada para paralelización.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Idea general del método}
+  \begin{itemize}
+    \item Se desea calcular una integral multidimensional:
+    \[
+      I = \int_{[a,b]^d} f(\mathbf{x})\, d\mathbf{x}.
+    \]
+    \item Se reescribe como valor esperado:
+    \[
+      I = V\,\mathbb{E}[f(\mathbf{X})], \quad V = (b-a)^d.
+    \]
+    \item Aproximación por Monte Carlo:
+    \[
+      \hat{I}_N = V\,\frac{1}{N}\sum_{i=1}^N f(\mathbf{X}_i).
+    \]
+    \item Ventaja: el error decrece como $N^{-1/2}$ y no depende de la dimensión.
   \end{itemize}
 \end{frame}
 
 % ====================
-\section{Ejemplo}
+\section{Implementación secuencial}
 % ====================
 
-\begin{frame}{Un ejemplo matemático}
-  \[
-    \int_0^\infty e^{-x^2}\, dx = \frac{\sqrt{\pi}}{2}
-  \]
+\begin{frame}{Función objetivo utilizada}
+  \begin{itemize}
+    \item Se toma como función de prueba:
+    \[
+      f(\mathbf{x}) = \exp\left(-\sum_{i=1}^d x_i^2\right).
+    \]
+    \item Aparición en:
+      \begin{itemize}
+        \item física estadística,
+        \item probabilidad multivariada,
+        \item integrales gaussianas en altas dimensiones.
+      \end{itemize}
+    \item Es una función suave y bien comportada para estudiar convergencia y error.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Generación de puntos aleatorios}
+  \begin{itemize}
+    \item Se usa el generador \texttt{std::mt19937} (Mersenne Twister).
+    \item Se genera un uniforme en $[0,1]$:
+    \[
+      r = \frac{\texttt{generador()}}{\texttt{generador.max()}}.
+    \]
+    \item Se escala al intervalo $[a,b]$:
+    \[
+      x_i = a + (b-a)\, r.
+    \]
+    \item El proceso se repite para cada dimensión y para cada punto.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Código principal del método}
+  \small
+\begin{verbatim}
+for (int i = 0; i < N; i++) {
+    std::vector<double> punto(dimensiones);
+    for (int d = 0; d < dimensiones; d++) {
+        double r = double(generador()) /
+                   double(generador.max());
+        punto[d] = lim_inf + (lim_sup - lim_inf)*r;
+    }
+
+    double valor_final = func(punto);
+    suma_final  += valor_final;
+    suma_final2 += valor_final*valor_final;
+}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Cálculo de la integral y del error}
+  \begin{itemize}
+    \item Promedio:
+    \[
+      \hat{f} = \frac{1}{N}\sum_{i=1}^N f(\mathbf{x}_i).
+    \]
+    \item Varianza:
+    \[
+      \hat{\sigma}^2 = \mathbb{E}[f^2] - (\mathbb{E}[f])^2
+      \approx \frac{1}{N}\sum f(\mathbf{x}_i)^2 - \hat{f}^2.
+    \]
+    \item Integral estimada:
+    \[
+      I \approx V \hat{f}.
+    \]
+    \item Error estadístico:
+    \[
+      \Delta I = V\sqrt{\frac{\hat{\sigma}^2}{N}}.
+    \]
+  \end{itemize}
 \end{frame}
 
 % ====================
-\section{Cierre}
+\section{Versión interactiva}
 % ====================
 
-\begin{frame}{Conclusiones}
-  \begin{block}{Lo que aprendimos}
-    \begin{itemize}
-      \item Cómo usar Beamer en Overleaf
-      \item Personalizar colores, pie de página y portada
-    \end{itemize}
-  \end{block}
+\begin{frame}[fragile]{Versión con argumentos de línea de comandos}
+  \begin{itemize}
+    \item El programa permite elegir parámetros desde la terminal:
+  \end{itemize}
+
+\begin{verbatim}
+./mc --li 0 --ls 1 --d 3 --n 5000000
+\end{verbatim}
+
+  \begin{itemize}
+    \item Parámetros:
+      \begin{itemize}
+        \item \texttt{--li}: límite inferior.
+        \item \texttt{--ls}: límite superior.
+        \item \texttt{--d}: número de dimensiones.
+        \item \texttt{--n}: número de puntos N.
+      \end{itemize}
+    \item Esta versión facilita:
+      \begin{itemize}
+        \item barrer distintos valores de $N$,
+        \item cambiar dimensión $d$,
+        \item automatizar experimentos para medir tiempos.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+% ====================
+\section{Paralelización (espacios)}
+% ====================
+
+\begin{frame}{Memoria compartida (espacio reservado)}
+  \textbf{Aquí debe ir la parte de memoria compartida.}
+
+  Sugerencias de contenido:
+  \begin{itemize}
+    \item Explicar la idea de paralelizar el ciclo de Monte Carlo usando hilos.
+    \item Mostrar brevemente el uso de OpenMP (por ejemplo, \texttt{\#pragma omp parallel for}).
+    \item Comentar el uso de \texttt{reduction} para \texttt{suma\_final} y \texttt{suma\_final2}.
+    \item Presentar tiempos de ejecución con 1, 2, 4, 8 hilos y el speedup observado.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Memoria distribuida (espacio reservado)}
+  \textbf{Aquí debe ir la parte de memoria distribuida.}
+
+  Sugerencias de contenido:
+  \begin{itemize}
+    \item Describir cómo se reparte el total de $N$ puntos entre varios procesos.
+    \item Explicar el uso de MPI: cada proceso calcula una parte de la suma.
+    \item Mencionar funciones como \texttt{MPI\_Reduce} para combinar resultados.
+    \item Discutir el impacto de la comunicación entre procesos.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Escalabilidad (espacio reservado)}
+  \textbf{Aquí debe ir el análisis de escalabilidad.}
+
+  Sugerencias de contenido:
+  \begin{itemize}
+    \item Definir speedup: $S(p) = T(1)/T(p)$.
+    \item Definir eficiencia: $E(p) = S(p)/p$.
+    \item Mostrar alguna tabla o gráfica con tiempos para distintos números de hilos/procesos.
+    \item Comparar comportamiento en memoria compartida vs. distribuida.
+  \end{itemize}
+\end{frame}
+
+% ====================
+\section{Conclusiones}
+% ====================
+
+\begin{frame}{Conclusiones del proyecto}
+  \begin{itemize}
+    \item El método de Monte Carlo es adecuado para integrales multidimensionales.
+    \item La implementación secuencial sirve como referencia para el análisis de rendimiento.
+    \item La paralelización en memoria compartida y distribuida permite reducir significativamente el tiempo de cómputo.
+    \item El estudio de la escalabilidad muestra los límites prácticos de la aceleración.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{Gracias}
   \centering
-  ¡Preguntas?  
-  \vfill
-  %\includegraphics[width=1.5cm]{logo.png}
+  ¡Preguntas?
 \end{frame}
 
 \end{document}
+\documentclass{beamer}
+
+% ====================
+% TEMAS Y COLORES
+% ====================
+\usetheme{Madrid} % Tema base
+\usecolortheme{seahorse} % Paleta de colores
+\usefonttheme{professionalfonts}
+
+% Colores personalizados
+\definecolor{maincolor}{RGB}{0,90,150}
+\definecolor{secondary}{RGB}{200,40,40}
+
+\setbeamercolor{structure}{fg=maincolor} % títulos y bullets
+\setbeamercolor{frametitle}{fg=white,bg=maincolor}
+\setbeamercolor{title}{fg=white,bg=maincolor}
+\setbeamercolor{footline}{bg=maincolor, fg=white}
+
+% ====================
+% DATOS DE LA PRESENTACIÓN
+% ====================
+\title[Física Computacional]{Aceleración de la técnica de Monte Carlo para integración numérica usando memoria compartida y memoria distribuida}
+%\subtitle{Plantilla personalizada en Overleaf}
+\author[]{Edwin Urbina Quiroz\\
+Ervin Villalta Cáceres\\
+Isao Núñez Okubo
+}
+\institute{Universidad de Costa Rica}
+\date{\today}
+
+% Logo (opcional, coloca tu archivo logo.png en el proyecto Overleaf)
+% \titlegraphic{\includegraphics[width=2cm]{logo.png}}
+
+% ====================
+% PIE DE PÁGINA
+% ====================
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.7\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\hspace{2mm}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshorttitle \hspace{2mm}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Quitar barra de navegación
+\setbeamertemplate{navigation symbols}{}
+
+\begin{document}
+
+% ====================
+% PORTADA
+% ====================
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% ====================
+% TABLA DE CONTENIDOS
+% ====================
+\begin{frame}{Contenido}
+  \tableofcontents
+\end{frame}
+
+% ====================
+\section{Introducción}
+% ====================
+
+\begin{frame}{Motivación del proyecto}
+  \begin{itemize}
+    \item La integración numérica tradicional se vuelve muy costosa en altas dimensiones.
+    \item La técnica de Monte Carlo reduce este costo usando muestreo aleatorio.
+    \item Objetivo del proyecto:
+      \begin{itemize}
+        \item Implementar la integración de Monte Carlo multidimensional.
+        \item Acelerar el método usando memoria compartida y memoria distribuida.
+        \item Estudiar la escalabilidad del método.
+      \end{itemize}
+    \item Nota: en clase se vio una versión de ``Monte Carlo de punto medio'', pero en el proyecto se implementa la variante estándar por muestreo uniforme directo, que es la adecuada para paralelización.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Idea general del método}
+  \begin{itemize}
+    \item Se desea calcular una integral multidimensional:
+    \[
+      I = \int_{[a,b]^d} f(\mathbf{x})\, d\mathbf{x}.
+    \]
+    \item Se reescribe como valor esperado:
+    \[
+      I = V\,\mathbb{E}[f(\mathbf{X})], \quad V = (b-a)^d.
+    \]
+    \item Aproximación por Monte Carlo:
+    \[
+      \hat{I}_N = V\,\frac{1}{N}\sum_{i=1}^N f(\mathbf{X}_i).
+    \]
+    \item Ventaja: el error decrece como $N^{-1/2}$ y no depende de la dimensión.
+  \end{itemize}
+\end{frame}
+
+% ====================
+\section{Implementación secuencial}
+% ====================
+
+\begin{frame}{Función objetivo utilizada}
+  \begin{itemize}
+    \item Se toma como función de prueba:
+    \[
+      f(\mathbf{x}) = \exp\left(-\sum_{i=1}^d x_i^2\right).
+    \]
+    \item Aparición en:
+      \begin{itemize}
+        \item física estadística,
+        \item probabilidad multivariada,
+        \item integrales gaussianas en altas dimensiones.
+      \end{itemize}
+    \item Es una función suave y bien comportada para estudiar convergencia y error.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Generación de puntos aleatorios}
+  \begin{itemize}
+    \item Se usa el generador \texttt{std::mt19937} (Mersenne Twister).
+    \item Se genera un uniforme en $[0,1]$:
+    \[
+      r = \frac{\texttt{generador()}}{\texttt{generador.max()}}.
+    \]
+    \item Se escala al intervalo $[a,b]$:
+    \[
+      x_i = a + (b-a)\, r.
+    \]
+    \item El proceso se repite para cada dimensión y para cada punto.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Código principal del método}
+  \small
+\begin{verbatim}
+for (int i = 0; i < N; i++) {
+    std::vector<double> punto(dimensiones);
+    for (int d = 0; d < dimensiones; d++) {
+        double r = double(generador()) /
+                   double(generador.max());
+        punto[d] = lim_inf + (lim_sup - lim_inf)*r;
+    }
+
+    double valor_final = func(punto);
+    suma_final  += valor_final;
+    suma_final2 += valor_final*valor_final;
+}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Cálculo de la integral y del error}
+  \begin{itemize}
+    \item Promedio:
+    \[
+      \hat{f} = \frac{1}{N}\sum_{i=1}^N f(\mathbf{x}_i).
+    \]
+    \item Varianza:
+    \[
+      \hat{\sigma}^2 = \mathbb{E}[f^2] - (\mathbb{E}[f])^2
+      \approx \frac{1}{N}\sum f(\mathbf{x}_i)^2 - \hat{f}^2.
+    \]
+    \item Integral estimada:
+    \[
+      I \approx V \hat{f}.
+    \]
+    \item Error estadístico:
+    \[
+      \Delta I = V\sqrt{\frac{\hat{\sigma}^2}{N}}.
+    \]
+  \end{itemize}
+\end{frame}
+
+% ====================
+\section{Versión interactiva}
+% ====================
+
+\begin{frame}[fragile]{Versión con argumentos de línea de comandos}
+  \begin{itemize}
+    \item El programa permite elegir parámetros desde la terminal:
+  \end{itemize}
+
+\begin{verbatim}
+./mc --li 0 --ls 1 --d 3 --n 5000000
+\end{verbatim}
+
+  \begin{itemize}
+    \item Parámetros:
+      \begin{itemize}
+        \item \texttt{--li}: límite inferior.
+        \item \texttt{--ls}: límite superior.
+        \item \texttt{--d}: número de dimensiones.
+        \item \texttt{--n}: número de puntos N.
+      \end{itemize}
+    \item Esta versión facilita:
+      \begin{itemize}
+        \item barrer distintos valores de $N$,
+        \item cambiar dimensión $d$,
+        \item automatizar experimentos para medir tiempos.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+% ====================
+\section{Paralelización (espacios)}
+% ====================
+
+\begin{frame}{Memoria compartida (espacio reservado)}
+  \textbf{Aquí debe ir la parte de memoria compartida.}
+
+  Sugerencias de contenido:
+  \begin{itemize}
+    \item Explicar la idea de paralelizar el ciclo de Monte Carlo usando hilos.
+    \item Mostrar brevemente el uso de OpenMP (por ejemplo, \texttt{\#pragma omp parallel for}).
+    \item Comentar el uso de \texttt{reduction} para \texttt{suma\_final} y \texttt{suma\_final2}.
+    \item Presentar tiempos de ejecución con 1, 2, 4, 8 hilos y el speedup observado.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Memoria distribuida (espacio reservado)}
+  \textbf{Aquí debe ir la parte de memoria distribuida.}
+
+  Sugerencias de contenido:
+  \begin{itemize}
+    \item Describir cómo se reparte el total de $N$ puntos entre varios procesos.
+    \item Explicar el uso de MPI: cada proceso calcula una parte de la suma.
+    \item Mencionar funciones como \texttt{MPI\_Reduce} para combinar resultados.
+    \item Discutir el impacto de la comunicación entre procesos.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Escalabilidad (espacio reservado)}
+  \textbf{Aquí debe ir el análisis de escalabilidad.}
+
+  Sugerencias de contenido:
+  \begin{itemize}
+    \item Definir speedup: $S(p) = T(1)/T(p)$.
+    \item Definir eficiencia: $E(p) = S(p)/p$.
+    \item Mostrar alguna tabla o gráfica con tiempos para distintos números de hilos/procesos.
+    \item Comparar comportamiento en memoria compartida vs. distribuida.
+  \end{itemize}
+\end{frame}
+
+% ====================
+\section{Conclusiones}
+% ====================
+
+\begin{frame}{Conclusiones del proyecto}
+  \begin{itemize}
+    \item El método de Monte Carlo es adecuado para integrales multidimensionales.
+    \item La implementación secuencial sirve como referencia para el análisis de rendimiento.
+    \item La paralelización en memoria compartida y distribuida permite reducir significativamente el tiempo de cómputo.
+    \item El estudio de la escalabilidad muestra los límites prácticos de la aceleración.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Gracias}
+  \centering
+  ¡Preguntas?
+\end{frame}
+
+\end{document}
+
