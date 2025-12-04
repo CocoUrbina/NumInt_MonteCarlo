@@ -1,4 +1,4 @@
-# Integracion Numerica de Monte Carlo
+# Integración Numérica de MonteCarlo
 
 Este proyecto implementa y acelera la integración numérica mediante el método de **Monte Carlo**, usando:
 
@@ -7,7 +7,7 @@ Este proyecto implementa y acelera la integración numérica mediante el método
 - Integrales **multidimensionales** y estudio del **error numérico**.
 
 En esta página se presenta la motivación general y la formulación básica del método.  
-Los detalles conceptuales se amplían en la sección **Explanation**, los ejemplos paso a paso en **Tutorials** y la documentación de funciones en **Reference**.
+Los detalles conceptuales se amplían en la sección **Explicación**, los ejemplos paso a paso en **Ejemplos de uso** y la documentación de funciones en **Documentación**.
 
 ---
 
