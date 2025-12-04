@@ -1,4 +1,4 @@
-# Integración Numérica de MonteCarlo
+# Introducción
 
 Este proyecto implementa y acelera la integración numérica mediante el método de **Monte Carlo**, usando:
 
