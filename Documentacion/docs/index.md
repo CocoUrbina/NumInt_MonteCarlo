@@ -59,7 +59,7 @@ La técnica de Monte Carlo es particularmente poderosa para evaluar integrales e
 
 ## Navegación
 
-- **Explición**: detalle teórico del método, derivaciones y consideraciones numéricas.
+- **Explicación**: detalle teórico del método, derivaciones y consideraciones numéricas.
 - **Ejemplos de uso**: ejemplos completos de uso, desde casos simples hasta integrales multidimensionales.
 - **Documentación**: API y descripción formal de las funciones e interfaces del código.
 
