@@ -221,6 +221,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -237,6 +255,69 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-de-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de ejecución
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -289,6 +370,58 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplo-de-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de ejecución
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -305,8 +438,47 @@
 
 
 <h1 id="documentacion">Documentación</h1>
-<p>Aqui va la documentacion</p>
-<p>En C++ se hace a pie.</p>
+<h2 id="descripcion">Descripción</h2>
+<p>Este proyecto implementa un <strong>método de integración Monte Carlo</strong> para aproximar la integral de funciones multidimensionales del tipo:</p>
+<div class="arithmatex">\[
+f(x_1, x_2, \dots, x_d) = e^{-(x_1^2 + x_2^2 + \dots + x_d^2)}
+\]</div>
+<p>dentro de un hipercubo definido por límites inferiores y superiores en cada dimensión. El programa está escrito en <strong>C++</strong> y permite al usuario especificar los límites de integración, la dimensión del espacio y la cantidad de puntos aleatorios a usar.</p>
+<p>El método Monte Carlo se basa en generar <strong>puntos aleatorios uniformemente distribuidos</strong> dentro del hipercubo y promediar las evaluaciones de la función para estimar la integral. También se calcula una estimación del error usando la varianza muestral.</p>
+<hr />
+<h2 id="uso">Uso</h2>
+<p>El programa se ejecuta desde la línea de comandos con el siguiente formato:</p>
+<p>```bash
+./nombre_programa --li [límite inferior] --ls [límite superior] --d [dimensión] --n [número de puntos]</p>
+<h2 id="parametros">Parámetros</h2>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--li</code></td>
+<td>Límite inferior de integración (double).</td>
+</tr>
+<tr>
+<td><code>--ls</code></td>
+<td>Límite superior de integración (double).</td>
+</tr>
+<tr>
+<td><code>--d</code></td>
+<td>Número de dimensiones (int).</td>
+</tr>
+<tr>
+<td><code>--n</code></td>
+<td>Número de puntos aleatorios a generar (int).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ejemplo-de-ejecucion">Ejemplo de ejecución</h2>
+<p>./montecarlo --li 0 --ls 1 --d 3 --n 100000</p>
 
 
 
