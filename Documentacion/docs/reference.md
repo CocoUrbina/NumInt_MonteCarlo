@@ -110,4 +110,3 @@ El programa muestra:
 -   varianza\
 -   escala del error
 
-Todo esto en un formato claro para el usuario.
