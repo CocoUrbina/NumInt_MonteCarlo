@@ -1,19 +1,19 @@
-# Ejemplos de uso
+# Tutorials
 
 Este documento explica cómo ejecutar, modificar y acelerar el programa de integración Monte Carlo usando sus cuatro versiones: secuencial interactiva, secuencial con argumentos, paralela con OpenMP y paralela con MPI. También incluye todos los experimentos necesarios para cumplir los milestones del proyecto.
 
 ---
 
-# 1. Versión secuencial con parámetros internos (mc_interactivo.cpp)
+# 1. Versión secuencial con parámetros internos (MonteCarlo.cpp)
 
 ## Compilación
 ```bash
-g++ -O3 -std=c++17 mc_interactivo.cpp -o mc_interactivo
+g++ -O3 -std=c++17 MonteCarlo.cpp -o MonteCarlo
 ```
 
 ## Ejecución
 ```bash
-./mc_interactivo
+./MonteCarlo
 ```
 
 ## Experimentos sugeridos (Milestone 1)
@@ -27,23 +27,23 @@ g++ -O3 -std=c++17 mc_interactivo.cpp -o mc_interactivo
 
 ---
 
-# 2. Versión secuencial con argumentos (mc.cpp)
+# 2. Versión secuencial con argumentos (MonteCarlo2.cpp)
 
 ## Compilación
 ```bash
-g++ -O3 -std=c++17 mc.cpp -o mc
+g++ -O3 -std=c++17 MonteCarlo2.cpp -o MonteCarlo2
 ```
 
 ## Ejecución
 ```bash
-./mc --li <lim_inf> --ls <lim_sup> --d <dim> --n <puntos>
+./MonteCarlo2 --li <lim_inf> --ls <lim_sup> --d <dim> --n <puntos>
 ```
 
 ## Ejemplos
 ```bash
-./mc --li 0 --ls 1 --d 3 --n 10000
-./mc --li 0 --ls 1 --d 3 --n 100000
-./mc --li 0 --ls 1 --d 3 --n 1000000
+./MonteCarlo2 --li 0 --ls 1 --d 3 --n 10000
+./MonteCarlo2 --li 0 --ls 1 --d 3 --n 100000
+./MonteCarlo2 --li 0 --ls 1 --d 3 --n 1000000
 ```
 
 ## Estudio del error (Milestone 2)
@@ -55,7 +55,7 @@ g++ -O3 -std=c++17 mc.cpp -o mc
 
 ---
 
-# 3. Versión con OpenMP (mc_omp.cpp)
+# 3. Versión con memoria compartida (ParalelizacionMC.cpp)
 
 Cambios principales respecto al código secuencial:
 - Cada hilo usa su propio generador: `std::mt19937 gen(seed + tid * 7919);`
@@ -68,22 +68,22 @@ Cambios principales respecto al código secuencial:
 
 ## Compilación
 ```bash
-g++ -O3 -std=c++17 -fopenmp mc_omp.cpp -o mc_omp
+g++ -O3 -std=c++17 -fopenmp ParalelizacionMC.cpp -o ParalelizacionMC
 ```
 
 ## Ejecución con distinto número de hilos
 ```bash
 export OMP_NUM_THREADS=1
-./mc_omp --li 0 --ls 1 --d 3 --n 10000000
+./ParalelizacionMC --li 0 --ls 1 --d 3 --n 10000000
 
 export OMP_NUM_THREADS=2
-./mc_omp --li 0 --ls 1 --d 3 --n 10000000
+./ParalelizacionMC --li 0 --ls 1 --d 3 --n 10000000
 
 export OMP_NUM_THREADS=4
-./mc_omp --li 0 --ls 1 --d 3 --n 10000000
+./ParalelizacionMC --li 0 --ls 1 --d 3 --n 10000000
 
 export OMP_NUM_THREADS=8
-./mc_omp --li 0 --ls 1 --d 3 --n 10000000
+./ParalelizacionMC --li 0 --ls 1 --d 3 --n 10000000
 ```
 
 ## Escalamiento (Milestone 3)
@@ -101,7 +101,7 @@ Registrar:
 
 ---
 
-# 4. Versión con MPI (mc_mpi.cpp)
+# 4. Versión con MPI (ParalelizacionMD.cpp)
 
 Cambios principales:
 - División del trabajo entre procesos usando nlocal.
@@ -114,15 +114,15 @@ Cambios principales:
 
 ## Compilación
 ```bash
-mpic++ -O3 -std=c++17 mc_mpi.cpp -o mc_mpi
+mpic++ -O3 -std=c++17 ParalelizacionMD.cpp -o ParalelizacionMD
 ```
 
 ## Ejecución
 ```bash
-mpirun -np 1 ./mc_mpi --li 0 --ls 1 --d 3 --n 10000000
-mpirun -np 2 ./mc_mpi --li 0 --ls 1 --d 3 --n 10000000
-mpirun -np 4 ./mc_mpi --li 0 --ls 1 --d 3 --n 10000000
-mpirun -np 8 ./mc_mpi --li 0 --ls 1 --d 3 --n 10000000
+mpirun -np 1 ./ParalelizacionMD --li 0 --ls 1 --d 3 --n 10000000
+mpirun -np 2 ./ParalelizacionMD --li 0 --ls 1 --d 3 --n 10000000
+mpirun -np 4 ./ParalelizacionMD --li 0 --ls 1 --d 3 --n 10000000
+mpirun -np 8 ./ParalelizacionMD --li 0 --ls 1 --d 3 --n 10000000
 ```
 
 ## Escalamiento distribuido (Milestone 4)
@@ -139,18 +139,18 @@ Registrar:
 # 5. Lista final de experimentos obligatorios
 
 ## (A) Error Monte Carlo
-- Ejecutar mc.cpp para varios N.
+- Ejecutar MonteCarlo2 para varios N.
 - Graficar log(error) vs log(N).
-- Verificar pendiente ≈ -0.5.
+- Verificar pendiente ≈ −0.5.
 
 ## (B) Escalamiento en OpenMP
 - Fijar N grande.
-- Probar p = 1,2,4,8 hilos.
-- Obtener speedup y eficiencia.
+- Probar p = 1, 2, 4, 8 hilos.
+- Calcular speedup y eficiencia.
 
 ## (C) Escalamiento en MPI
 - Fijar N grande.
-- Probar np = 1,2,4,8 procesos.
+- Probar np = 1, 2, 4, 8 procesos.
 - Comparar con OpenMP.
 
 ---
@@ -161,7 +161,7 @@ Este tutorial contiene:
 - Cómo ejecutar cada versión del programa.
 - Qué modificar para los experimentos.
 - Cómo medir tiempos.
-- Cómo hacer speedup y eficiencia.
+- Cómo obtener speedup y eficiencia.
 - Cómo verificar el comportamiento del error.
 - Qué incluir en el informe final del proyecto.
 
