@@ -1,59 +1,95 @@
 #include <iostream>
-#include <cstdlib> //c standard library para el srand (veremos después)
+#include <vector>
+#include <random>
 #include <cmath>
 
-
-//Primero la función a integrar (multidimensional como dice en milestone)
-double func(double x, double y, double z){
-  return exp(-(x * x + y * y + z * z));
+// Función a integrar: e^(-(x1^2 + x2^2 + ...))
+double func(const std::vector<double>& punto) {
+    double suma = 0.0;
+    for (size_t i = 0; i < punto.size(); ++i) {
+        double coordenada = punto[i];
+        suma += coordenada * coordenada;
+    }
+    return exp(-suma);
 }
 
+int main(int argc, char* argv[]) {
 
-//función main
-int main(){
-  
-  //datos necesarios
-  int N = 10000000;
-  double lim_inf = 0.0;
-  double lim_sup = 1.0;
-  int dimensiones = 3;
-
-  //ahora aquí vamos a poner el seed para que los números pseudoaleatorios se repitan en todo lugar
-
-  std::srand(2345);
-
-  //ahora ya con el setup, hacemos el montecarlo de puntos medios
+    if(argc != 9){
+        std::cerr << "Usage: " << argv[0] << " --li [límite inferior] --ls [límite superior] --d [número de dimensiones] --n [cantidad de puntos]" << std::endl;
+        exit(1);
 
 
-  // creamos variable sum para ir sumando las funciones
-  double sum = 0.0;
-  
+    }
 
-  //ahora for loop creo que probablmente aquí tenga que hacer la paralelización:
-  for (int i = 0; i < N; i++){
-  
-    //ahora para números aleatorios, serán de forma uniforme (misma prob que salgan) (son números aleatorios dentro del rango de lim_inf y lim_sup
+    //Parámetros elegidos por el usuario
+    double lim_inf, lim_sup;
 
-    double x = lim_inf + (lim_sup - lim_inf) * (double(std::rand()) / RAND_MAX);
-    double y = lim_inf + (lim_sup - lim_inf) * (double(std::rand()) / RAND_MAX);
-    double z = lim_inf + (lim_sup - lim_inf) * (double(std::rand()) / RAND_MAX);
+    lim_inf = atof(argv[2]);
+    lim_sup = atof(argv[4]);
+
+    int dimensiones, N;
+
+    dimensiones = atoi(argv[6]);
+    N = atoi(argv[8]);
     
-//antes de lo siguiente es importante explicar que RAND_MAX es el numero aleatorio maximo, lo estoy dividiendo entre rand_max para que de TODOS los números que pueden salir según la computadora, si lo divido entre RAND_MAX quedará entre 0 y 1 de forma uniforme que es nuestro rango
+    // semilla
+    unsigned int seed = 12345;
+    
+    // Generador Mersenne Twister 
+    std::mt19937 generador(seed);
+    
+    // Variables para el cálculo
+    double suma_final = 0.0;
+    double suma_final2 = 0.0;  // Para calcular varianza
+    
+    // Bucle principal de Monte Carlo
+    for (int i = 0; i < N; i++) {
+        // Generar punto multidimensional (creo que es mejor evitar traer uniform... del std library?
+        std::vector<double> punto(dimensiones);
+        for (int d = 0; d < dimensiones; d++) {
+            // Generar número uniforme entre 0 y 1 manualmente
+            double r = double(generador()) / 
+                       double(generador.max());
+            
+            // Escalar al rango siguiente
+            punto[d] = lim_inf + (lim_sup - lim_inf) * r;
+        }
+        
+        // Evaluar función
+        double valor_final = func(punto);
+        
+        // Acumular para cálculos finales después
+        suma_final += valor_final;
+        suma_final2 += valor_final * valor_final;
+    }
+    
+    // Cálculos finales
+    double promedio = suma_final / N;
+    double promedio_cuadrado = suma_final2 / N;
+    double varianza = promedio_cuadrado - promedio * promedio;
+    
+    // Volumen del hipercubo
+    double volumen = 1.0;
+    for (int d = 0; d < dimensiones; d++) {
+        volumen *= (lim_sup - lim_inf);
+    }
 
-    //ahora agrego a nuestro sum
-    sum += func(x,y,z);
-  }
+    // Estimación de la integral
+    double integral = promedio * volumen;
 
-//ahora estimemos el valor medio <f>
-  double promedio = sum / N;
+    // Estimación del error
+    double error = volumen * std::sqrt(varianza / N);
 
-//sacamos volumen de cubo porque es integral de tres dimensiones:
-  double volumen = (lim_sup - lim_inf) * (lim_sup - lim_inf) * (lim_sup - lim_inf);
-
-//ahora finalmente saco la integral
-  double integral = promedio * volumen;
-
-  std::cout << "La integral con Monte Carlo sería:" << integral << std::endl;
-
-  return 0;
+    // Resultados
+    std::cout << "Dimensión que utilizaremos: " << dimensiones << std::endl;
+    std::cout << "Número de puntos: " << N << std::endl;
+    std::cout << "Límites: (" << lim_inf << ", " << lim_sup << ")" << std::endl;
+    std::cout << "RESULTADOS:" << std::endl;
+    std::cout << "Integral estimada: " << integral << std::endl;
+    std::cout << "Error estimado: " << error << std::endl;
+    std::cout << "Varianza de f: " << varianza << std::endl;
+    std::cout << "Escala del error: O(N^{-1/2})" << std::endl;
+    
+    return 0;
 }
