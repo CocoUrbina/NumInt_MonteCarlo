@@ -21,7 +21,7 @@
     
     
       
-        <title>Ejemplos de uso - Integración Numérica de MonteCarlo</title>
+        <title>Ejemplo de uso - Integración Numérica de MonteCarlo</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ejemplos-de-uso" class="md-skip">
+        <a href="#ejemplo-de-uso" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ejemplos de uso
+              Ejemplo de uso
             
           </span>
         </div>
@@ -190,7 +190,7 @@
   <span class="md-ellipsis">
     
   
-    Explicación
+    Explicación del proyecto: Integración Monte Carlo secuencial y paralela (OpenMP + MPI)
   
 
     
@@ -253,7 +253,7 @@
   <span class="md-ellipsis">
     
   
-    Ejemplos de uso
+    Ejemplo de uso
   
 
     
@@ -302,9 +302,137 @@
 
 
 
-<h1 id="ejemplos-de-uso">Ejemplos de uso</h1>
-<p>Esta seccion muestra cómo ejecutar ejemplos prácticos.</p>
+<h1 id="ejemplo-de-uso">Ejemplo de uso</h1>
+<p>Este documento explica cómo ejecutar, modificar y acelerar el programa de integración Monte Carlo usando sus cuatro versiones: secuencial interactiva, secuencial con argumentos, paralela con OpenMP y paralela con MPI. También incluye todos los experimentos necesarios para cumplir los milestones del proyecto.</p>
 <hr />
+<h1 id="1-version-secuencial-con-parametros-internos-montecarlo2cpp">1. Versión secuencial con parámetros internos (MonteCarlo2.cpp)</h1>
+<h2 id="compilacion">Compilación</h2>
+<pre><code class="language-bash">g++ -O3 -std=c++17 MonteCarlo2.cpp -o MonteCarlo2
+</code></pre>
+<h2 id="ejecucion">Ejecución</h2>
+<pre><code class="language-bash">./MonteCarlo2
+</code></pre>
+<h2 id="experimentos-sugeridos-milestone-1">Experimentos sugeridos (Milestone 1)</h2>
+<ul>
+<li>Modificar N en el archivo: 1e5, 1e6, 1e7.</li>
+<li>Modificar dimensiones: 2, 3, 4, ...</li>
+<li>Ejecutar y registrar:</li>
+<li>Integral estimada</li>
+<li>Varianza</li>
+<li>Error estimado</li>
+<li>Observar mejora al aumentar N.</li>
+</ul>
+<hr />
+<h1 id="2-version-secuencial-con-argumentos-montecarlocpp">2. Versión secuencial con argumentos (MonteCarlo.cpp)</h1>
+<h2 id="compilacion_1">Compilación</h2>
+<pre><code class="language-bash">g++ -O3 -std=c++17 MonteCarlo.cpp -o MonteCarlo
+</code></pre>
+<h2 id="ejecucion_1">Ejecución</h2>
+<pre><code class="language-bash">./MonteCarlo --li &lt;lim_inf&gt; --ls &lt;lim_sup&gt; --d &lt;dim&gt; --n &lt;puntos&gt;
+</code></pre>
+<h2 id="ejemplos">Ejemplos</h2>
+<pre><code class="language-bash">./MonteCarlo --li 0 --ls 1 --d 3 --n 10000
+./MonteCarlo --li 0 --ls 1 --d 3 --n 100000
+./MonteCarlo --li 0 --ls 1 --d 3 --n 1000000
+</code></pre>
+<h2 id="estudio-del-error-milestone-2">Estudio del error (Milestone 2)</h2>
+<ol>
+<li>Fijar d = 3.</li>
+<li>Probar N = 1e4, 1e5, 1e6, 1e7.</li>
+<li>Registrar el error.</li>
+<li>Graficar log(error) vs log(N).</li>
+<li>Pendiente ≈ -1/2 confirma teoría Monte Carlo.</li>
+</ol>
+<hr />
+<h1 id="3-version-con-memoria-compartida-paralelizacionmccpp">3. Versión con memoria compartida (ParalelizacionMC.cpp)</h1>
+<p>Cambios principales respecto al código secuencial:
+- Cada hilo usa su propio generador: <code>std::mt19937 gen(seed + tid * 7919);</code>
+- Se usa distribución uniforme estándar.
+- Paralelización del bucle con reducción:
+  <code>cpp
+  #pragma omp for reduction(+: suma_final, suma_final2)</code>
+- Se mide el tiempo con <code>omp_get_wtime()</code>.</p>
+<h2 id="compilacion_2">Compilación</h2>
+<pre><code class="language-bash">g++ -O3 -std=c++17 -fopenmp ParalelizacionMC.cpp -o ParalelizacionMC
+</code></pre>
+<h2 id="ejecucion-con-distinto-numero-de-hilos">Ejecución con distinto número de hilos</h2>
+<pre><code class="language-bash">export OMP_NUM_THREADS=1
+./ParalelizacionMC --li 0 --ls 1 --d 3 --n 10000000
+
+export OMP_NUM_THREADS=2
+./ParalelizacionMC --li 0 --ls 1 --d 3 --n 10000000
+
+export OMP_NUM_THREADS=4
+./ParalelizacionMC --li 0 --ls 1 --d 3 --n 10000000
+
+export OMP_NUM_THREADS=8
+./ParalelizacionMC --li 0 --ls 1 --d 3 --n 10000000
+</code></pre>
+<h2 id="escalamiento-milestone-3">Escalamiento (Milestone 3)</h2>
+<p>Calcular:
+- Speedup:<br />
+  $$ S(p) = \frac{T_1}{T_p} $$
+- Eficiencia:<br />
+  $$ E(p) = \frac{S(p)}{p} $$</p>
+<p>Registrar:
+- Tiempos
+- Speedup
+- Eficiencia
+- Número de hilos usados</p>
+<hr />
+<h1 id="4-version-con-mpi-paralelizacionmdcpp">4. Versión con MPI (ParalelizacionMD.cpp)</h1>
+<p>Cambios principales:
+- División del trabajo entre procesos usando nlocal.
+- Semilla distinta por proceso: <code>seed + rank * 1234567</code>.
+- Uso de MPI_Reduce para sumar resultados parciales:
+  <code>cpp
+  MPI_Reduce(&amp;s_local, &amp;s_global, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);</code>
+- Medición del tiempo con MPI_Wtime().</p>
+<h2 id="compilacion_3">Compilación</h2>
+<pre><code class="language-bash">mpic++ -O3 -std=c++17 ParalelizacionMD.cpp -o ParalelizacionMD
+</code></pre>
+<h2 id="ejecucion_2">Ejecución</h2>
+<pre><code class="language-bash">mpirun -np 1 ./ParalelizacionMD --li 0 --ls 1 --d 3 --n 10000000
+mpirun -np 2 ./ParalelizacionMD --li 0 --ls 1 --d 3 --n 10000000
+mpirun -np 4 ./ParalelizacionMD --li 0 --ls 1 --d 3 --n 10000000
+mpirun -np 8 ./ParalelizacionMD --li 0 --ls 1 --d 3 --n 10000000
+</code></pre>
+<h2 id="escalamiento-distribuido-milestone-4">Escalamiento distribuido (Milestone 4)</h2>
+<p>Registrar:
+- Tiempo del proceso 0.
+- Calcular speedup y eficiencia igual que OpenMP.
+- Comentar diferencias entre OpenMP y MPI:
+  - MPI escala mejor para N grandes.
+  - Para N pequeños, MPI tiene overhead significativo.</p>
+<hr />
+<h1 id="5-lista-final-de-experimentos-obligatorios">5. Lista final de experimentos obligatorios</h1>
+<h2 id="a-error-monte-carlo">(A) Error Monte Carlo</h2>
+<ul>
+<li>Ejecutar MonteCarlo2 para varios N.</li>
+<li>Graficar log(error) vs log(N).</li>
+<li>Verificar pendiente ≈ −0.5.</li>
+</ul>
+<h2 id="b-escalamiento-en-openmp">(B) Escalamiento en OpenMP</h2>
+<ul>
+<li>Fijar N grande.</li>
+<li>Probar p = 1, 2, 4, 8 hilos.</li>
+<li>Calcular speedup y eficiencia.</li>
+</ul>
+<h2 id="c-escalamiento-en-mpi">(C) Escalamiento en MPI</h2>
+<ul>
+<li>Fijar N grande.</li>
+<li>Probar np = 1, 2, 4, 8 procesos.</li>
+<li>Comparar con OpenMP.</li>
+</ul>
+<hr />
+<h1 id="6-resumen">6. Resumen</h1>
+<p>Este tutorial contiene:
+- Cómo ejecutar cada versión del programa.
+- Qué modificar para los experimentos.
+- Cómo medir tiempos.
+- Cómo obtener speedup y eficiencia.
+- Cómo verificar el comportamiento del error.
+- Qué incluir en el informe final del proyecto.</p>
 
 
 

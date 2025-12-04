@@ -23,7 +23,7 @@
     
     
       
-        <title>Explicación - Integración Numérica de MonteCarlo</title>
+        <title>Explicación del proyecto: Integración Monte Carlo secuencial y paralela (OpenMP + MPI) - Integración Numérica de MonteCarlo</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#explicacion" class="md-skip">
+        <a href="#explicacion-del-proyecto-integracion-monte-carlo-secuencial-y-paralela-openmp-mpi" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Explicación
+              Explicación del proyecto: Integración Monte Carlo secuencial y paralela (OpenMP + MPI)
             
           </span>
         </div>
@@ -201,7 +201,7 @@
   <span class="md-ellipsis">
     
   
-    Explicación
+    Explicación del proyecto: Integración Monte Carlo secuencial y paralela (OpenMP + MPI)
   
 
     
@@ -219,7 +219,7 @@
   <span class="md-ellipsis">
     
   
-    Explicación
+    Explicación del proyecto: Integración Monte Carlo secuencial y paralela (OpenMP + MPI)
   
 
     
@@ -245,10 +245,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-motivacion-del-metodo-de-monte-carlo" class="md-nav__link">
+  <a href="#1-motivacion-por-que-usar-monte-carlo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Motivación del método de Monte Carlo
+        1. Motivación: por qué usar Monte Carlo
       
     </span>
   </a>
@@ -256,10 +256,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-fundamento-matematico-integral-como-valor-esperado" class="md-nav__link">
+  <a href="#2-fundamento-matematico-del-metodo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Fundamento matemático: integral como valor esperado
+        2. Fundamento matemático del método
       
     </span>
   </a>
@@ -267,10 +267,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-convergencia-del-metodo" class="md-nav__link">
+  <a href="#3-funcion-objetivo-utilizada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Convergencia del método
+        3. Función objetivo utilizada
       
     </span>
   </a>
@@ -278,55 +278,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-funcion-objetivo-utilizada" class="md-nav__link">
+  <a href="#4-generacion-de-numeros-aleatorios-y-escalamiento-al-intervalo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Función objetivo utilizada
+        4. Generación de números aleatorios y escalamiento al intervalo
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-generacion-de-numeros-aleatorios" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Generación de números aleatorios
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-estructura-general-del-algoritmo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Estructura general del algoritmo
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-sobre-las-dos-versiones-del-codigo-usadas-en-el-proyecto" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Sobre las dos versiones del código usadas en el proyecto
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7. Sobre las dos versiones del código usadas en el proyecto">
+    <nav class="md-nav" aria-label="4. Generación de números aleatorios y escalamiento al intervalo">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-codigo-estatico" class="md-nav__link">
+  <a href="#41-version-secuencial-y-mpi-forma-simple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        (1) Código estático
+        4.1 Versión secuencial y MPI (forma simple)
       
     </span>
   </a>
@@ -334,21 +301,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-codigo-interactivo-parsing-de-argumentos" class="md-nav__link">
+  <a href="#42-version-openmp-distribucion-explicita" class="md-nav__link">
     <span class="md-ellipsis">
       
-        (2) Código interactivo (parsing de argumentos)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cual-version-debe-describirse-en-esta-seccion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Cuál versión debe describirse en esta sección?
+        4.2 Versión OpenMP (distribución explícita)
       
     </span>
   </a>
@@ -361,10 +317,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-seccion-reservada-paralelismo-con-memoria-compartida-openmp" class="md-nav__link">
+  <a href="#5-estructura-general-del-algoritmo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8. Sección reservada: paralelismo con memoria compartida (OpenMP)
+        5. Estructura general del algoritmo
       
     </span>
   </a>
@@ -372,32 +328,221 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-seccion-reservada-paralelismo-con-memoria-distribuida-mpi" class="md-nav__link">
+  <a href="#6-versiones-secuenciales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        9. Sección reservada: paralelismo con memoria distribuida (MPI)
+        6. Versiones secuenciales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Versiones secuenciales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-version-con-parametros-fijos-en-el-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Versión con parámetros fijos en el código
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#10-seccion-reservada-analisis-de-escalabilidad" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#62-version-con-parametros-desde-la-linea-de-comando" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. Sección reservada: análisis de escalabilidad
+        6.2 Versión con parámetros desde la línea de comando
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#11-conclusion-conceptual" class="md-nav__link">
+  <a href="#7-paralelismo-con-memoria-compartida-openmp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. Conclusión conceptual
+        7. Paralelismo con memoria compartida: OpenMP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Paralelismo con memoria compartida: OpenMP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-idea-basica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Idea básica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-estructura-del-codigo-con-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Estructura del código con OpenMP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-calculo-de-tiempos-y-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Cálculo de tiempos y resultados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-comentario-de-correccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Comentario de corrección
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-paralelismo-con-memoria-distribuida-mpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Paralelismo con memoria distribuida: MPI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Paralelismo con memoria distribuida: MPI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-inicializacion-y-parametros-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Inicialización y parámetros globales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-division-del-trabajo-entre-procesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 División del trabajo entre procesos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-generacion-aleatoria-y-acumulacion-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Generación aleatoria y acumulación local
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-reduccion-global-y-calculo-final-en-el-proceso-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Reducción global y cálculo final en el proceso 0
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-escalabilidad-y-rendimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Escalabilidad y rendimiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Escalabilidad y rendimiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-definiciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Definiciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-escalabilidad-con-openmp-memoria-compartida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Escalabilidad con OpenMP (memoria compartida)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-escalabilidad-con-mpi-memoria-distribuida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Escalabilidad con MPI (memoria distribuida)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-conclusiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Conclusiones
       
     </span>
   </a>
@@ -453,7 +598,7 @@
   <span class="md-ellipsis">
     
   
-    Ejemplos de uso
+    Ejemplo de uso
   
 
     
@@ -493,10 +638,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-motivacion-del-metodo-de-monte-carlo" class="md-nav__link">
+  <a href="#1-motivacion-por-que-usar-monte-carlo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Motivación del método de Monte Carlo
+        1. Motivación: por qué usar Monte Carlo
       
     </span>
   </a>
@@ -504,10 +649,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-fundamento-matematico-integral-como-valor-esperado" class="md-nav__link">
+  <a href="#2-fundamento-matematico-del-metodo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Fundamento matemático: integral como valor esperado
+        2. Fundamento matemático del método
       
     </span>
   </a>
@@ -515,10 +660,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-convergencia-del-metodo" class="md-nav__link">
+  <a href="#3-funcion-objetivo-utilizada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Convergencia del método
+        3. Función objetivo utilizada
       
     </span>
   </a>
@@ -526,55 +671,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-funcion-objetivo-utilizada" class="md-nav__link">
+  <a href="#4-generacion-de-numeros-aleatorios-y-escalamiento-al-intervalo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Función objetivo utilizada
+        4. Generación de números aleatorios y escalamiento al intervalo
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-generacion-de-numeros-aleatorios" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Generación de números aleatorios
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-estructura-general-del-algoritmo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Estructura general del algoritmo
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-sobre-las-dos-versiones-del-codigo-usadas-en-el-proyecto" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Sobre las dos versiones del código usadas en el proyecto
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7. Sobre las dos versiones del código usadas en el proyecto">
+    <nav class="md-nav" aria-label="4. Generación de números aleatorios y escalamiento al intervalo">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-codigo-estatico" class="md-nav__link">
+  <a href="#41-version-secuencial-y-mpi-forma-simple" class="md-nav__link">
     <span class="md-ellipsis">
       
-        (1) Código estático
+        4.1 Versión secuencial y MPI (forma simple)
       
     </span>
   </a>
@@ -582,21 +694,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-codigo-interactivo-parsing-de-argumentos" class="md-nav__link">
+  <a href="#42-version-openmp-distribucion-explicita" class="md-nav__link">
     <span class="md-ellipsis">
       
-        (2) Código interactivo (parsing de argumentos)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cual-version-debe-describirse-en-esta-seccion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ¿Cuál versión debe describirse en esta sección?
+        4.2 Versión OpenMP (distribución explícita)
       
     </span>
   </a>
@@ -609,10 +710,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-seccion-reservada-paralelismo-con-memoria-compartida-openmp" class="md-nav__link">
+  <a href="#5-estructura-general-del-algoritmo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8. Sección reservada: paralelismo con memoria compartida (OpenMP)
+        5. Estructura general del algoritmo
       
     </span>
   </a>
@@ -620,32 +721,221 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-seccion-reservada-paralelismo-con-memoria-distribuida-mpi" class="md-nav__link">
+  <a href="#6-versiones-secuenciales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        9. Sección reservada: paralelismo con memoria distribuida (MPI)
+        6. Versiones secuenciales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Versiones secuenciales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-version-con-parametros-fijos-en-el-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Versión con parámetros fijos en el código
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#10-seccion-reservada-analisis-de-escalabilidad" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#62-version-con-parametros-desde-la-linea-de-comando" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. Sección reservada: análisis de escalabilidad
+        6.2 Versión con parámetros desde la línea de comando
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#11-conclusion-conceptual" class="md-nav__link">
+  <a href="#7-paralelismo-con-memoria-compartida-openmp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. Conclusión conceptual
+        7. Paralelismo con memoria compartida: OpenMP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Paralelismo con memoria compartida: OpenMP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-idea-basica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Idea básica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-estructura-del-codigo-con-openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Estructura del código con OpenMP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-calculo-de-tiempos-y-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Cálculo de tiempos y resultados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-comentario-de-correccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 Comentario de corrección
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-paralelismo-con-memoria-distribuida-mpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Paralelismo con memoria distribuida: MPI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Paralelismo con memoria distribuida: MPI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-inicializacion-y-parametros-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Inicialización y parámetros globales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-division-del-trabajo-entre-procesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 División del trabajo entre procesos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-generacion-aleatoria-y-acumulacion-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Generación aleatoria y acumulación local
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-reduccion-global-y-calculo-final-en-el-proceso-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Reducción global y cálculo final en el proceso 0
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-escalabilidad-y-rendimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Escalabilidad y rendimiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Escalabilidad y rendimiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-definiciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Definiciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-escalabilidad-con-openmp-memoria-compartida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Escalabilidad con OpenMP (memoria compartida)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-escalabilidad-con-mpi-memoria-distribuida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Escalabilidad con MPI (memoria distribuida)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-conclusiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Conclusiones
       
     </span>
   </a>
@@ -669,206 +959,435 @@
 
 
 
-<h1 id="explicacion">Explicación</h1>
-<p>Este documento presenta el fundamento matemático, computacional y conceptual del proyecto.<br />
-Aquí se explica el método de Monte Carlo, su convergencia, la función utilizada, la estructura general del algoritmo, y se señalan los apartados donde se integrarán las extensiones del proyecto relacionadas con <strong>memoria compartida</strong>, <strong>memoria distribuida</strong> y <strong>escalabilidad paralela</strong>.</p>
+<h1 id="explicacion-del-proyecto-integracion-monte-carlo-secuencial-y-paralela-openmp-mpi">Explicación del proyecto: Integración Monte Carlo secuencial y paralela (OpenMP + MPI)</h1>
+<p>Este documento explica el fundamento matemático, computacional y paralelo del proyecto.<br />
+Se describen:</p>
+<ul>
+<li>El método de Monte Carlo y su convergencia.  </li>
+<li>La función que se integra numéricamente.  </li>
+<li>La estructura general del algoritmo.  </li>
+<li>El uso del generador Mersenne Twister (MT19937).  </li>
+<li>La implementación secuencial (parámetros fijos y por línea de comando).  </li>
+<li>La paralelización con <strong>OpenMP (memoria compartida)</strong>.  </li>
+<li>La paralelización con <strong>MPI (memoria distribuida)</strong>.  </li>
+<li>El análisis de <strong>escalabilidad</strong> en ambos esquemas paralelos.</li>
+</ul>
 <hr />
-<h2 id="1-motivacion-del-metodo-de-monte-carlo">1. Motivación del método de Monte Carlo</h2>
-<p>La integración numérica tradicional (trapecio, Simpson, cuadraturas gaussianas) escala de forma muy pobre con la dimensión del espacio.<br />
-Si se quiere calcular</p>
-<div class="arithmatex">\[
-I = \int_{\Omega} f(\mathbf{x}) \, d\mathbf{x},
-\]</div>
-<p>y <span class="arithmatex">\(\Omega\)</span> es un dominio <span class="arithmatex">\(d\)</span>-dimensional, los métodos deterministas requieren una cantidad de puntos proporcional a <span class="arithmatex">\(N^d\)</span> (fenómeno conocido como <em>curse of dimensionality</em>).</p>
-<p>Monte Carlo evita esta explosión combinatoria mediante el uso de <strong>muestras aleatorias</strong>, lo que permite que el error dependa principalmente de la cantidad de puntos y <strong>no</strong> de la dimensión.</p>
+<h2 id="1-motivacion-por-que-usar-monte-carlo">1. Motivación: por qué usar Monte Carlo</h2>
+<p>La integración numérica determinista (regla del trapecio, Simpson, cuadraturas gaussianas, etc.) escala muy mal con la dimensión <span class="arithmatex">\(d\)</span>.<br />
+    Si se toma una malla con <span class="arithmatex">\(N\)</span> puntos por dimensión, el número total de puntos es <span class="arithmatex">\(N^d\)</span>, lo que vuelve el problema intratable cuando <span class="arithmatex">\(d\)</span> crece (<em>curse of dimensionality</em>).</p>
+<p>El método de Monte Carlo evita esta explosión combinatoria porque:</p>
+<ul>
+<li>El error estadístico depende de <span class="arithmatex">\(N\)</span> (número de muestras) pero <strong>no</strong> de la dimensión.  </li>
+<li>La convergencia típica es</li>
+</ul>
+<p>$$
+  \Delta I \sim O\left(N^{-1/2}\right),
+  $$</p>
+<p>independientemente de <span class="arithmatex">\(d\)</span>.</p>
+<p>Por esto Monte Carlo es una herramienta estándar para integrales de alta dimensión.</p>
 <hr />
-<h2 id="2-fundamento-matematico-integral-como-valor-esperado">2. Fundamento matemático: integral como valor esperado</h2>
-<p>Consideremos un hipercubo <span class="arithmatex">\([a,b]^d\)</span> y definamos su volumen como</p>
+<h2 id="2-fundamento-matematico-del-metodo">2. Fundamento matemático del método</h2>
+<p>Consideremos la integral</p>
 <div class="arithmatex">\[
-V = (b - a)^d.
+I = \int_{\Omega} f(\mathbf{x})\, d\mathbf{x},
 \]</div>
-<p>Si <span class="arithmatex">\(\mathbf{X}\)</span> es un vector aleatorio uniforme en dicho dominio, entonces la integral puede reescribirse como:</p>
+<p>donde <span class="arithmatex">\(\Omega = [a,b]^d\)</span> es un hipercubo de dimensión <span class="arithmatex">\(d\)</span>.<br />
+El volumen de <span class="arithmatex">\(\Omega\)</span> es</p>
 <div class="arithmatex">\[
-I = \int_{[a,b]^d} f(\mathbf{x})\,d\mathbf{x} = V \, \mathbb{E}[f(\mathbf{X})].
+V = (b-a)^d.
 \]</div>
-<p>Por lo tanto, si tomamos <span class="arithmatex">\(N\)</span> muestras independientes <span class="arithmatex">\(\mathbf{X}_1, \ldots, \mathbf{X}_N\)</span>, podemos estimar:</p>
+<p>Si <span class="arithmatex">\(\mathbf{X}\)</span> es un vector aleatorio uniforme en <span class="arithmatex">\(\Omega\)</span>, se cumple:</p>
 <div class="arithmatex">\[
-\hat{I}_N = V \frac{1}{N} \sum_{i=1}^{N} f(\mathbf{X}_i).
+I = \int_{\Omega} f(\mathbf{x})\, d\mathbf{x} = V \, \mathbb{E}[f(\mathbf{X})].
 \]</div>
-<p>Esta fórmula es la base del código utilizado.</p>
-<hr />
-<h2 id="3-convergencia-del-metodo">3. Convergencia del método</h2>
-<p>Una propiedad clave de Monte Carlo es que el error decrece según:</p>
+<p>La idea de Monte Carlo es aproximar <span class="arithmatex">\(\mathbb{E}[f(\mathbf{X})]\)</span> mediante el promedio muestral.<br />
+Tomamos <span class="arithmatex">\(N\)</span> vectores independientes <span class="arithmatex">\(\mathbf{X}_1, \ldots, \mathbf{X}_N\)</span>, y definimos el estimador:</p>
 <div class="arithmatex">\[
-\Delta I \sim O(N^{-1/2}),
+\hat I_N = V\frac{1}{N}\sum_{i=1}^N f(\mathbf{X}_i).
 \]</div>
-<p>sin importar la dimensión <span class="arithmatex">\(d\)</span>.<br />
-Esto hace al método muy atractivo para integrales de alta dimensión.</p>
-<p>En la práctica, el error se estima como:</p>
-<div class="arithmatex">\[
-\Delta I = V \sqrt{\frac{\sigma^2}{N}},
-\]</div>
-<p>donde</p>
+<p>El error estadístico puede estimarse usando la varianza muestral de <span class="arithmatex">\(f\)</span>:</p>
 <div class="arithmatex">\[
 \sigma^2 = \mathbb{E}[f^2] - (\mathbb{E}[f])^2.
 \]</div>
-<p>En el programa, se calcula esto mediante:</p>
+<p>El error típico (desviación estándar del estimador) es:</p>
+<div class="arithmatex">\[
+\Delta I \approx V \sqrt{\frac{\sigma^2}{N}}.
+\]</div>
+<p>En el programa:</p>
 <ul>
-<li><code>suma_final</code> → aproximación de <span class="arithmatex">\(\mathbb{E}[f]\)</span>  </li>
-<li><code>suma_final2</code> → aproximación de <span class="arithmatex">\(\mathbb{E}[f^2]\)</span></li>
+<li><code>suma_final</code> aproxima <span class="arithmatex">\(\sum_{i=1}^N f(\mathbf{X}_i)\)</span>,</li>
+<li><code>suma_final2</code> aproxima <span class="arithmatex">\(\sum_{i=1}^N f(\mathbf{X}_i)^2\)</span>.</li>
+</ul>
+<p>A partir de estos acumuladores se calcula:</p>
+<ul>
+<li>El promedio <span class="arithmatex">\(\hat f = \text{suma\_final}/N\)</span>.</li>
+<li>El promedio de cuadrados <span class="arithmatex">\(\widehat{f^2} = \text{suma\_final2}/N\)</span>.</li>
+<li>La varianza estimada <span class="arithmatex">\(\hat\sigma^2 = \widehat{f^2} - \hat f^{\,2}\)</span>.</li>
+<li>El error estimado <span class="arithmatex">\(\Delta I = V \sqrt{\hat\sigma^2/N}\)</span>.</li>
 </ul>
 <hr />
-<h2 id="4-funcion-objetivo-utilizada">4. Función objetivo utilizada</h2>
-<p>Para las pruebas se escogió:</p>
+<h2 id="3-funcion-objetivo-utilizada">3. Función objetivo utilizada</h2>
+<p>En las cuatro versiones del código se integra la misma función:</p>
 <div class="arithmatex">\[
 f(\mathbf{x}) = \exp\left(-\sum_{i=1}^d x_i^2\right),
 \]</div>
-<p>una función suave que aparece en:</p>
+<p>donde <span class="arithmatex">\(\mathbf{x} = (x_1, \dots, x_d)\)</span> y <span class="arithmatex">\(d\)</span> es el número de dimensiones.</p>
+<p>Esta elección tiene varias ventajas:</p>
 <ul>
-<li>probabilidad multivariada,  </li>
-<li>física estadística,  </li>
-<li>integrales gaussianas de alta dimensión.</li>
+<li>Es una función suave y bien comportada en todo <span class="arithmatex">\(\mathbb{R}^d\)</span>.  </li>
+<li>Está relacionada con distribuciones gaussianas multivariadas.  </li>
+<li>Es representativa de problemas reales en física estadística e integración de funciones tipo gaussiana.</li>
 </ul>
-<p>Es ideal para evaluar el rendimiento del método.</p>
-<hr />
-<h2 id="5-generacion-de-numeros-aleatorios">5. Generación de números aleatorios</h2>
-<p>El proyecto utiliza el generador <strong>MT19937 (Mersenne Twister)</strong> por su alta calidad estadística.</p>
-<p>Una coordenada uniforme entre 0 y 1 se genera como:</p>
-<pre><code class="language-cpp">double r = double(generador()) / double(generador.max());
+<p>En el código, esta función se implementa como:</p>
+<pre><code class="language-cpp">    double func(const std::vector&lt;double&gt;&amp; punto) {
+        double suma = 0.0;
+        for (size_t i = 0; i &lt; punto.size(); ++i) {
+            double coordenada = punto[i];
+            suma += coordenada * coordenada;
+        }
+        return exp(-suma);
+    }
 </code></pre>
-<p>Luego se escala al intervalo arbitrario <span class="arithmatex">\([a,b]\)</span> mediante:</p>
-<div class="arithmatex">\[
-x_i = a + (b - a) r.
-\]</div>
-<p>Este proceso se repite para cada dimensión y para cada punto de integración.</p>
 <hr />
-<h2 id="6-estructura-general-del-algoritmo">6. Estructura general del algoritmo</h2>
-<p>El algoritmo implementado sigue los pasos clásicos del método de Monte Carlo:</p>
+<h2 id="4-generacion-de-numeros-aleatorios-y-escalamiento-al-intervalo">4. Generación de números aleatorios y escalamiento al intervalo</h2>
+<p>Se utiliza el generador pseudoaleatorio <strong>Mersenne Twister (std::mt19937)</strong>.<br />
+La semilla se fija explícitamente para garantizar reproducibilidad.</p>
+<h3 id="41-version-secuencial-y-mpi-forma-simple">4.1 Versión secuencial y MPI (forma simple)</h3>
+<p>En algunas versiones se genera un número uniforme <span class="arithmatex">\([0,1]\)</span> como:</p>
+<pre><code class="language-cpp">    double r = double(generador()) / double(generador.max());
+</code></pre>
+<p>Dado que para <code>std::mt19937</code> se cumple <code>min() = 0</code>, esta expresión produce valores uniformes en el intervalo <span class="arithmatex">\([0,1]\)</span>.</p>
+<p>Luego se escala al intervalo <span class="arithmatex">\([a,b]\)</span> mediante:</p>
+<div class="arithmatex">\[
+x = a + (b-a)\,r.
+\]</div>
+<p>en código:</p>
+<pre><code class="language-cpp">    punto[d] = lim_inf + (lim_sup - lim_inf) * r;
+</code></pre>
+<h3 id="42-version-openmp-distribucion-explicita">4.2 Versión OpenMP (distribución explícita)</h3>
+<p>En la versión paralela con OpenMP se utiliza:</p>
+<ul>
+<li>Un generador <code>std::mt19937</code> independiente por hilo.  </li>
+<li>Una distribución explícita <code>std::uniform_real_distribution&lt;double&gt;(lim_inf, lim_sup)</code>.</li>
+</ul>
+<p>Ejemplo de uso:</p>
+<pre><code class="language-cpp">    std::mt19937 generador(seed + tid * 7919);
+    std::uniform_real_distribution&lt;double&gt; dist(lim_inf, lim_sup);
+
+    for (int d = 0; d &lt; dimensiones; d++) {
+        punto[d] = dist(generador);
+    }
+</code></pre>
+<p>Este esquema es estadísticamente correcto e independiente en cada hilo, evitando correlaciones entre secuencias.</p>
+<hr />
+<h2 id="5-estructura-general-del-algoritmo">5. Estructura general del algoritmo</h2>
+<p>La lógica básica es la misma en las cuatro versiones:</p>
 <ol>
-<li>Elegir los parámetros del problema:<br />
-   número de puntos <span class="arithmatex">\(N\)</span>, número de dimensiones <span class="arithmatex">\(d\)</span>, y límites del dominio.</li>
-<li>Inicializar el generador pseudoaleatorio (MT19937).</li>
-<li>Para cada iteración <span class="arithmatex">\(i = 1, \ldots, N\)</span>:</li>
-<li>Generar un punto <span class="arithmatex">\(\mathbf{X}_i\)</span> en dimensión <span class="arithmatex">\(d\)</span>.  </li>
-<li>Evaluar la función objetivo <span class="arithmatex">\(f(\mathbf{X}_i)\)</span>.  </li>
-<li>Acumular <span class="arithmatex">\(f(\mathbf{X}_i)\)</span> y <span class="arithmatex">\(f(\mathbf{X}_i)^2\)</span>.</li>
-<li>Calcular:  </li>
-<li>el valor medio aproximado <span class="arithmatex">\(\hat{f}\)</span>,  </li>
-<li>la varianza aproximada <span class="arithmatex">\(\hat{\sigma}^2\)</span>,  </li>
-<li>la integral estimada <span class="arithmatex">\(\hat{I}_N\)</span>,  </li>
-<li>y el error estadístico asociado.</li>
-<li>Imprimir los resultados.</li>
+<li><strong>Lectura o definición de parámetros</strong>  </li>
+<li>Límite inferior <code>lim_inf</code>.  </li>
+<li>Límite superior <code>lim_sup</code>.  </li>
+<li>Número de dimensiones <code>dimensiones</code>.  </li>
+<li>
+<p>Número de puntos <code>N</code>.</p>
+</li>
+<li>
+<p><strong>Inicialización de acumuladores</strong>  </p>
+</li>
+<li><code>suma_final = 0.0</code>.  </li>
+<li>
+<p><code>suma_final2 = 0.0</code>.</p>
+</li>
+<li>
+<p><strong>Bucle principal de Monte Carlo</strong><br />
+   Para cada punto:</p>
+</li>
+<li>Generar un vector <code>punto</code> de dimensión <code>dimensiones</code>.  </li>
+<li>Evaluar <code>valor_final = func(punto)</code>.  </li>
+<li>
+<p>Acumular:</p>
+<ul>
+<li><code>suma_final += valor_final;</code>  </li>
+<li><code>suma_final2 += valor_final * valor_final;</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cálculo de promedios y varianza</strong>  </p>
+</li>
+<li>
+<p><code>promedio = suma_final / N;</code>  </p>
+</li>
+<li><code>promedio_cuadrado = suma_final2 / N;</code>  </li>
+<li>
+<p><code>varianza = promedio_cuadrado - promedio * promedio;</code>.</p>
+</li>
+<li>
+<p><strong>Cálculo del volumen del dominio</strong>  </p>
+</li>
+<li>
+<p><code>volumen = (lim_sup - lim_inf)^dimensiones</code>.</p>
+</li>
+<li>
+<p><strong>Estimación final de la integral y del error</strong></p>
+</li>
+<li>
+<p><code>integral = promedio * volumen;</code>  </p>
+</li>
+<li>
+<p><code>error = volumen * sqrt(varianza / N);</code>.</p>
+</li>
+<li>
+<p><strong>Impresión de resultados</strong></p>
+</li>
 </ol>
-<p>El estimador final toma la forma:</p>
+<p>Se muestran:
+   - Dimensión.<br />
+   - Número de puntos.<br />
+   - Intervalo de integración.<br />
+   - Integral estimada.<br />
+   - Error estimado.<br />
+   - Varianza de la función.<br />
+   - La escala del error <span class="arithmatex">\(O(N^{-1/2})\)</span>.<br />
+   - En las versiones paralelas, el tiempo de ejecución.</p>
+<hr />
+<h2 id="6-versiones-secuenciales">6. Versiones secuenciales</h2>
+<p>En el proyecto hay dos versiones secuenciales del código base.</p>
+<h3 id="61-version-con-parametros-fijos-en-el-codigo">6.1 Versión con parámetros fijos en el código</h3>
+<p>En esta versión:</p>
+<pre><code class="language-cpp">    int N = 10000000;
+    int dimensiones = 3;
+    double lim_inf = 0.0;
+    double lim_sup = 1.0;
+</code></pre>
+<ul>
+<li>Todos los parámetros están definidos dentro del <code>main()</code>.  </li>
+<li>Es útil para pruebas controladas, comparaciones y debugging.  </li>
+<li>Permite verificar la corrección del método sin preocuparse por el parsing de argumentos.</li>
+</ul>
+<p>El resto del algoritmo (bucle Monte Carlo, cálculo de varianza, integral y error) sigue la estructura descrita en la sección 5.</p>
+<h3 id="62-version-con-parametros-desde-la-linea-de-comando">6.2 Versión con parámetros desde la línea de comando</h3>
+<p>La otra versión secuencial permite al usuario elegir los parámetros al momento de ejecutar el programa:</p>
+<pre><code class="language-bash">    ./mc --li &lt;lim_inf&gt; --ls &lt;lim_sup&gt; --d &lt;dim&gt; --n &lt;puntos&gt;
+</code></pre>
+<p>Se valida primero que se hayan recibido exactamente 9 argumentos (<code>argc != 9</code>).<br />
+Luego se extraen así:</p>
+<pre><code class="language-cpp">    lim_inf    = atof(argv[2]);
+    lim_sup    = atof(argv[4]);
+    dimensiones = atoi(argv[6]);
+    N          = atoi(argv[8]);
+</code></pre>
+<p>Esta versión es más flexible, pues el mismo ejecutable sirve para múltiples configuraciones sin recompilar.</p>
+<hr />
+<h2 id="7-paralelismo-con-memoria-compartida-openmp">7. Paralelismo con memoria compartida: OpenMP</h2>
+<p>La versión con <strong>OpenMP</strong> explota el paralelismo en memoria compartida, es decir, varias hebras (threads) dentro de un mismo proceso y nodo.</p>
+<h3 id="71-idea-basica">7.1 Idea básica</h3>
+<p>El bucle principal de Monte Carlo es:</p>
+<ul>
+<li>Altamente paralelo: cada punto se puede simular de forma independiente.  </li>
+<li>Ideal para dividir el trabajo entre hilos.  </li>
+</ul>
+<p>Si hay <span class="arithmatex">\(p\)</span> hilos, cada uno procesa aproximadamente <span class="arithmatex">\(N/p\)</span> puntos.</p>
+<h3 id="72-estructura-del-codigo-con-openmp">7.2 Estructura del código con OpenMP</h3>
+<p>La sección relevante del código es:</p>
+<pre><code class="language-cpp">    double suma_final = 0.0;
+    double suma_final2 = 0.0;
+    double time_1 = omp_get_wtime();
+    int num_procs = 1;
+
+    #pragma omp parallel
+    {
+        int tid = omp_get_thread_num();
+
+        // Semilla distinta por hilo
+        std::mt19937 generador(seed + tid * 7919);
+
+        // Distribución uniforme en [lim_inf, lim_sup]
+        std::uniform_real_distribution&lt;double&gt; dist(lim_inf, lim_sup);
+
+        std::vector&lt;double&gt; punto(dimensiones);
+
+        // Un solo hilo obtiene el número total de hilos
+        #pragma omp single
+        num_procs = omp_get_num_threads();
+
+        // Bucle Monte Carlo paralelo con reducción
+        #pragma omp for reduction (+: suma_final, suma_final2)
+        for (int i = 0; i &lt; N; i++) {
+            for (int d = 0; d &lt; dimensiones; d++) {
+                punto[d] = dist(generador);
+            }
+            double val = func(punto);
+            suma_final  += val;
+            suma_final2 += val * val;
+        }
+    }
+
+    double time_2 =  omp_get_wtime();
+</code></pre>
+<p>Puntos clave:</p>
+<ul>
+<li><code>#pragma omp parallel</code> crea un grupo de hilos que ejecutan el mismo bloque.  </li>
+<li>Cada hilo obtiene su identificador con <code>omp_get_thread_num()</code>.  </li>
+<li>La semilla se ajusta por hilo (<code>seed + tid * 7919</code>) para generar secuencias independientes.  </li>
+<li>La directiva <code>#pragma omp single</code> asegura que solo un hilo ejecute <code>num_procs = omp_get_num_threads();</code>.  </li>
+<li><code>#pragma omp for reduction(+: suma_final, suma_final2)</code> reparte las iteraciones del bucle <code>for (int i = 0; i &lt; N; i++)</code> entre los hilos, acumulando de manera segura las sumas en las variables globales mediante una reducción.</li>
+</ul>
+<p>Con esto se evita cualquier condición de carrera en <code>suma_final</code> y <code>suma_final2</code>.</p>
+<h3 id="73-calculo-de-tiempos-y-resultados">7.3 Cálculo de tiempos y resultados</h3>
+<p>El tiempo de ejecución se mide con <code>omp_get_wtime()</code> antes y después del bloque paralelo:</p>
+<ul>
+<li><code>time_1 = omp_get_wtime();</code>  </li>
+<li><code>time_2 = omp_get_wtime();</code>  </li>
+</ul>
+<p>El tiempo total es <code>time_2 - time_1</code>, que se imprime junto con la integral, error y varianza.</p>
+<h3 id="74-comentario-de-correccion">7.4 Comentario de corrección</h3>
+<p>La versión OpenMP es:</p>
+<ul>
+<li>Estadísticamente correcta (cada hilo tiene RNG propio).  </li>
+<li>Libre de condiciones de carrera (uso de <code>reduction</code>).  </li>
+<li>Reproducible dado un esquema fijo de hilos y semillas.</li>
+</ul>
+<hr />
+<h2 id="8-paralelismo-con-memoria-distribuida-mpi">8. Paralelismo con memoria distribuida: MPI</h2>
+<p>La versión con <strong>MPI</strong> reparte el trabajo entre procesos (potencialmente en diferentes nodos de un clúster).<br />
+Cada proceso tiene su propia memoria, su propio generador y calcula una parte del total.</p>
+<h3 id="81-inicializacion-y-parametros-globales">8.1 Inicialización y parámetros globales</h3>
+<p>Al inicio del <code>main</code> se encuentra:</p>
+<pre><code class="language-cpp">    MPI_Init(NULL, NULL);
+
+    int size, rank;
+    MPI_Comm_size(MPI_COMM_WORLD, &amp;size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank);
+</code></pre>
+<ul>
+<li><code>size</code>: número total de procesos.  </li>
+<li><code>rank</code>: identificador de cada proceso (0, 1, ..., size-1).</li>
+</ul>
+<p>También se registra el tiempo inicial:</p>
+<pre><code class="language-cpp">    double time_1 = MPI_Wtime();
+</code></pre>
+<h3 id="82-division-del-trabajo-entre-procesos">8.2 División del trabajo entre procesos</h3>
+<p>Se reparte <code>N</code> de la siguiente manera:</p>
+<pre><code class="language-cpp">    int nlocal = N / size;
+    int rest = N % size;
+
+    if (rest &amp;&amp; rank &lt; rest) {
+        nlocal++;
+    }
+</code></pre>
+<p>Así, los primeros <code>rest</code> procesos reciben un punto extra para balancear mejor la carga cuando <code>N</code> no es múltiplo de <code>size</code>.</p>
+<p>Luego se calcula el índice inicial <code>start</code> y el final <code>end</code> de cada proceso:</p>
+<pre><code class="language-cpp">    int start = nlocal * rank;
+
+    if (rest &amp;&amp; rank &gt;= rest) {
+        start += rest;
+    }
+
+    int end = start + nlocal;
+</code></pre>
+<p>Cada proceso ejecuta el bucle Monte Carlo en el rango <code>[start, end)</code>.</p>
+<h3 id="83-generacion-aleatoria-y-acumulacion-local">8.3 Generación aleatoria y acumulación local</h3>
+<p>Cada proceso crea su propio generador:</p>
+<pre><code class="language-cpp">    std::mt19937 generador(seed + rank * 1234567);
+</code></pre>
+<p>Se mantiene el mismo esquema de función <code>func(punto)</code> y se acumulan sumas locales:</p>
+<pre><code class="language-cpp">    double suma_local = 0.0;
+    double suma_cuadrados_local = 0.0;
+</code></pre>
+<p>En el bucle:</p>
+<pre><code class="language-cpp">    for (int i = start; i &lt; end; i++) {
+        std::vector&lt;double&gt; punto(dimensiones);
+        for (int d = 0; d &lt; dimensiones; d++) {
+            double r = double(generador()) / double(generador.max());
+            punto[d] = lim_inf + (lim_sup - lim_inf) * r;
+        }
+        double valor_final = func(punto);
+        suma_local          += valor_final;
+        suma_cuadrados_local += valor_final * valor_final;
+    }
+</code></pre>
+<h3 id="84-reduccion-global-y-calculo-final-en-el-proceso-0">8.4 Reducción global y cálculo final en el proceso 0</h3>
+<p>Las sumas locales se combinan en el proceso 0 mediante:</p>
+<pre><code class="language-cpp">    double suma_global, suma_cuadrados_global;
+
+    MPI_Reduce(&amp;suma_local, &amp;suma_global, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    MPI_Reduce(&amp;suma_cuadrados_local, &amp;suma_cuadrados_global, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+</code></pre>
+<p>Solo el proceso de <code>rank == 0</code> calcula:</p>
+<ul>
+<li><code>promedio</code>,  </li>
+<li><code>varianza</code>,  </li>
+<li><code>integral</code>,  </li>
+<li><code>error</code>,  </li>
+<li>y mide el tiempo total:</li>
+</ul>
+<pre><code class="language-cpp">    double time_2 = MPI_Wtime();
+
+    if (rank == 0) {
+        // Cálculos y printf de resultados
+    }
+</code></pre>
+<p>Finalmente, todos los procesos llaman a:</p>
+<pre><code class="language-cpp">    MPI_Finalize();
+</code></pre>
+<p>para cerrar el entorno MPI.</p>
+<hr />
+<h2 id="9-escalabilidad-y-rendimiento">9. Escalabilidad y rendimiento</h2>
+<p>La integración por Monte Carlo es un caso típico de <strong>cómputo "embarrassingly parallel"</strong>:</p>
+<ul>
+<li>Cada muestra es independiente.  </li>
+<li>No hay comunicación necesaria durante el cálculo, solo al final (reducción).  </li>
+</ul>
+<p>Esto hace que la escalabilidad sea muy buena tanto en memoria compartida como en memoria distribuida.</p>
+<h3 id="91-definiciones">9.1 Definiciones</h3>
+<p>Sea:</p>
+<ul>
+<li><span class="arithmatex">\(T(1)\)</span>: tiempo de ejecución con un solo hilo/proceso.  </li>
+<li><span class="arithmatex">\(T(p)\)</span>: tiempo de ejecución con <span class="arithmatex">\(p\)</span> hilos/procesos.</li>
+</ul>
+<p>El <strong>speedup</strong> se define como:</p>
 <div class="arithmatex">\[
-\hat{I}_N = V \, \hat{f},
+S(p) = \frac{T(1)}{T(p)}.
 \]</div>
-<p>donde <span class="arithmatex">\(V\)</span> es el volumen del dominio de integración.</p>
-<hr />
-<h2 id="7-sobre-las-dos-versiones-del-codigo-usadas-en-el-proyecto">7. Sobre las dos versiones del código usadas en el proyecto</h2>
-<p>El proyecto contiene dos implementaciones del mismo algoritmo:</p>
-<h3 id="1-codigo-estatico">(1) Código estático</h3>
-<p>En esta versión, los parámetros están fijados dentro del programa:</p>
-<pre><code class="language-cpp">int N = 10000000;
-int dimensiones = 3;
-double lim_inf = 0.0;
-double lim_sup = 1.0;
-</code></pre>
-<p>Este enfoque es útil para pruebas rápidas, reproducibilidad y debugging inicial.</p>
-<hr />
-<h3 id="2-codigo-interactivo-parsing-de-argumentos">(2) Código interactivo (parsing de argumentos)</h3>
-<p>Esta versión permite al usuario especificar los valores directamente desde la línea de comandos:</p>
-<p>./mc --li 0 --ls 1 --d 3 --n 10000000</p>
-<p>Esto se maneja mediante:</p>
-<pre><code class="language-cpp">if (argc != 9) {
-    std::cerr &lt;&lt; &quot;Usage: ...&quot; &lt;&lt; std::endl;
-    exit(1);
-}
-</code></pre>
-<p>y posterior extracción con <code>atof()</code> y <code>atoi()</code>.</p>
-<p>La ventaja del enfoque interactivo es que permite realizar múltiples experimentos sin re-compilar el programa.</p>
-<hr />
-<h3 id="cual-version-debe-describirse-en-esta-seccion">¿Cuál versión debe describirse en esta sección?</h3>
-<p>Ambas implementaciones realizan el mismo método numérico.<br />
-En <strong>Explanation.md</strong> debe explicarse:</p>
+<p>La <strong>eficiencia</strong> es:</p>
+<div class="arithmatex">\[
+E(p) = \frac{S(p)}{p}.
+\]</div>
+<p>El objetivo ideal es <span class="arithmatex">\(S(p) \approx p\)</span> y <span class="arithmatex">\(E(p) \approx 1\)</span>.</p>
+<h3 id="92-escalabilidad-con-openmp-memoria-compartida">9.2 Escalabilidad con OpenMP (memoria compartida)</h3>
+<p>En la versión OpenMP:</p>
 <ul>
-<li>el método matemático,  </li>
-<li>el flujo general del algoritmo,  </li>
-<li>las ideas principales.</li>
+<li>El cálculo se reparte entre hilos dentro de un mismo nodo.  </li>
+<li>No hay comunicación entre hilos durante el cálculo, sólo la reducción interna que maneja OpenMP.  </li>
+<li>La sobrecarga es muy baja.</li>
 </ul>
-<p>Los detalles sobre el uso de argumentos deben documentarse en:</p>
+<p>Por tanto:</p>
 <ul>
-<li><code>tutorials.md</code> (uso práctico),  </li>
-<li><code>reference.md</code> (API e interfaz del programa).</li>
+<li>Para valores grandes de <span class="arithmatex">\(N\)</span>, es esperable un <strong>speedup casi lineal</strong> mientras no se saturen los núcleos físicos del procesador.  </li>
+<li>A partir de cierto número de hilos, la ganancia marginal disminuye por overhead de sincronización y límites de hardware.</li>
+</ul>
+<h3 id="93-escalabilidad-con-mpi-memoria-distribuida">9.3 Escalabilidad con MPI (memoria distribuida)</h3>
+<p>En la versión MPI:</p>
+<ul>
+<li>Cada proceso realiza una fracción <span class="arithmatex">\(N_p\)</span> del total de muestras.  </li>
+<li>Sólo se comunican al final para sumar resultados (<code>MPI_Reduce</code>).  </li>
+</ul>
+<p>El costo de comunicación es muy pequeño comparado con el costo de cómputo cuando <span class="arithmatex">\(N\)</span> es grande, por lo que:</p>
+<ul>
+<li>El speedup también puede ser casi lineal con el número de procesos.  </li>
+<li>Esta versión permite escalar a múltiples nodos de un clúster, superando la limitación de memoria y núcleos de un solo nodo.</li>
 </ul>
 <hr />
-<h2 id="8-seccion-reservada-paralelismo-con-memoria-compartida-openmp">8. Sección reservada: paralelismo con memoria compartida (OpenMP)</h2>
-<blockquote>
-<p><strong>Esta sección se completará cuando se integre el código paralelo.</strong></p>
-</blockquote>
-<p>Aquí debe incluirse:</p>
-<ul>
-<li>El concepto de dividir el ciclo Monte Carlo entre múltiples hilos.  </li>
-<li>Cómo funciona una cláusula <code>reduction(+:suma_final, suma_final2)</code>.  </li>
-<li>Problemas de condiciones de carrera y reproducibilidad.  </li>
-<li>Límites prácticos del speedup debido a saturación de núcleos.</li>
-</ul>
-<p>Lo que NO debe incluirse aquí:</p>
-<ul>
-<li>Código completo de OpenMP.  </li>
-<li>Benchmarking detallado.  </li>
-<li>Flags de compilación.</li>
-</ul>
-<hr />
-<h2 id="9-seccion-reservada-paralelismo-con-memoria-distribuida-mpi">9. Sección reservada: paralelismo con memoria distribuida (MPI)</h2>
-<blockquote>
-<p><strong>Esta sección se completará cuando se implemente MPI.</strong></p>
-</blockquote>
-<p>Aquí debe explicarse:</p>
-<ul>
-<li>Cómo se divide el trabajo total <span class="arithmatex">\(N\)</span> entre procesos independientes.  </li>
-<li>Cómo cada proceso computa su estimador parcial:<br />
-<span class="arithmatex">\(<span class="arithmatex">\(\hat{f}_p = \frac{1}{N_p}\sum_{i=1}^{N_p} f(\mathbf{X}_{i,p})\)</span>\)</span>  </li>
-<li>Cómo se combinan los resultados mediante <code>MPI_Reduce</code> o <code>MPI_Allreduce</code>.  </li>
-<li>Cómo influyen latencia y ancho de banda en el rendimiento.</li>
-</ul>
-<p>NO incluir aquí:</p>
-<ul>
-<li>Código de MPI,  </li>
-<li>Tablas de resultados,  </li>
-<li>Scripts de ejecución.</li>
-</ul>
-<hr />
-<h2 id="10-seccion-reservada-analisis-de-escalabilidad">10. Sección reservada: análisis de escalabilidad</h2>
-<blockquote>
-<p><strong>Aquí se incluirá el análisis después de realizar las pruebas paralelas.</strong></p>
-</blockquote>
-<p>Debe contener:</p>
-<ul>
-<li>Speedup:<br />
-<span class="arithmatex">\(<span class="arithmatex">\(S(p) = \frac{T(1)}{T(p)}\)</span>\)</span>  </li>
-<li>Eficiencia:<br />
-<span class="arithmatex">\(<span class="arithmatex">\(E(p) = \frac{S(p)}{p}\)</span>\)</span>  </li>
-<li>Discusión sobre por qué Monte Carlo escala bien.  </li>
-<li>Comparación entre memoria compartida vs. distribuida.  </li>
-<li>Impacto del costo de comunicación en MPI.</li>
-</ul>
-<p>NO debe incluir:</p>
-<ul>
-<li>Tablas crudas,  </li>
-<li>Código repetido,  </li>
-<li>Gráficos directos (pueden ir en sección aparte).</li>
-</ul>
-<hr />
-<h2 id="11-conclusion-conceptual">11. Conclusión conceptual</h2>
-<p>El método de Monte Carlo provee:</p>
-<ul>
-<li>simplicidad en implementación,  </li>
-<li>independencia del error respecto a la dimensión,  </li>
-<li>facilidad para paralelizar,  </li>
-<li>control estadístico del error.</li>
-</ul>
-<p>Las dos versiones del código (estática e interactiva) brindan flexibilidad tanto para pruebas internas como para experimentación en entornos paralelos.</p>
+<h2 id="10-conclusiones">10. Conclusiones</h2>
+<ol>
+<li>El método de Monte Carlo ofrece una forma robusta de aproximar integrales de alta dimensión, con error que decae como <span class="arithmatex">\(O(N^{-1/2})\)</span> independientemente de la dimensión.  </li>
+<li>La función implementada, <span class="arithmatex">\(f(\mathbf{x}) = \exp(-\sum x_i^2)\)</span>, es un caso de prueba clásico y permite verificar tanto la corrección como el rendimiento del método.  </li>
+<li>Las versiones secuenciales (con parámetros fijos y con argumentos de línea de comando) comparten la misma lógica numérica y sirven como base de referencia.  </li>
+<li>La paralelización con OpenMP explota la memoria compartida y logra reducciones significativas en el tiempo de ejecución utilizando múltiples hilos dentro de un mismo nodo.  </li>
+<li>La paralelización con MPI divide el trabajo entre procesos distribuidos, permitiendo escalar el mismo método a múltiples nodos y aprovechar clústeres de cómputo.  </li>
+<li>Dado que el problema es “embarrassingly parallel”, ambas aproximaciones (OpenMP y MPI) presentan muy buena escalabilidad y se integran naturalmente en el flujo del algoritmo Monte Carlo, sin cambiar la fórmula del estimador, únicamente reduciendo el tiempo total de cómputo.</li>
+</ol>
+<p>Este documento resume así la parte matemática, computacional y de paralelización del proyecto de integración Monte Carlo, coherente con las cuatro implementaciones de código (secuencial fija, secuencial interactiva, OpenMP y MPI).</p>
 
 
 

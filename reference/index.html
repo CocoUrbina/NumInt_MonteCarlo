@@ -192,7 +192,7 @@
   <span class="md-ellipsis">
     
   
-    Explicación
+    Explicación del proyecto: Integración Monte Carlo secuencial y paralela (OpenMP + MPI)
   
 
     
@@ -337,6 +337,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ------------------------------------------------------------------------
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -359,7 +370,7 @@
   <span class="md-ellipsis">
     
   
-    Ejemplos de uso
+    Ejemplo de uso
   
 
     
@@ -464,6 +475,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ------------------------------------------------------------------------
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -483,17 +505,38 @@
 
 <h1 id="documentacion">Documentación</h1>
 <p>Documentación técnica del programa de integración Monte Carlo.</p>
+<hr />
 <h2 id="uso-de-la-linea-de-comando">Uso de la línea de comando</h2>
 <p>El programa se ejecuta como:</p>
 <pre><code class="language-bash">./mc --li &lt;lim_inf&gt; --ls &lt;lim_sup&gt; --d &lt;dim&gt; --n &lt;puntos&gt;
 </code></pre>
 <h2 id="argumentos">Argumentos</h2>
-<p>Argumento   Descripción</p>
-<hr />
-<p><code>--li</code>      Límite inferior del intervalo
-  <code>--ls</code>      Límite superior
-  <code>--d</code>       Número de dimensiones
-  <code>--n</code>       Cantidad de puntos</p>
+<table>
+<thead>
+<tr>
+<th>Argumento</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--li</code></td>
+<td>Límite inferior del intervalo</td>
+</tr>
+<tr>
+<td><code>--ls</code></td>
+<td>Límite superior</td>
+</tr>
+<tr>
+<td><code>--d</code></td>
+<td>Número de dimensiones</td>
+</tr>
+<tr>
+<td><code>--n</code></td>
+<td>Cantidad de puntos a generar</td>
+</tr>
+</tbody>
+</table>
 <p>Ejemplo:</p>
 <pre><code class="language-bash">./mc --li -2 --ls 2 --d 4 --n 500000
 </code></pre>
@@ -507,11 +550,11 @@ f(x) = e^{-(x_1^2 + \dots + x_d^2)}
 \]</div>
 <hr />
 <h2 id="generacion-de-puntos-aleatorios">Generación de puntos aleatorios</h2>
-<p>El código usa un generador Mersenne Twister:</p>
+<p>El programa utiliza el generador Mersenne Twister:</p>
 <pre><code class="language-cpp">std::mt19937 generador(seed);
 double r = double(generador()) / generador.max();
 </code></pre>
-<p>Luego escala el número uniforme al intervalo:</p>
+<p>Escalamiento al intervalo:</p>
 <pre><code class="language-cpp">punto[d] = lim_inf + (lim_sup - lim_inf) * r;
 </code></pre>
 <hr />
@@ -537,9 +580,100 @@ I \approx \bar{f} \cdot V
 <div class="arithmatex">\[
 \mathrm{Var}(f) = \langle f^2 \rangle - \langle f \rangle^2
 \]</div>
-<p>En código:</p>
+<p>Implementación:</p>
 <pre><code class="language-cpp">double varianza = promedio_cuadrado - promedio * promedio;
 </code></pre>
+<h2 id="-">------------------------------------------------------------------------</h2>
+<h1 id="paralelizacion-y-escalabilidad">Paralelización y Escalabilidad</h1>
+<p>A continuación se documentan las extensiones del programa que permiten acelerar la integración Monte Carlo mediante memoria compartida (OpenMP) y memoria distribuida (MPI).</p>
+<hr />
+<h2 id="paralelizacion-con-memoria-compartida-openmp">Paralelización con memoria compartida (OpenMP)</h2>
+<p>La versión paralela divide el bucle de Monte Carlo entre múltiples hilos que comparten memoria.</p>
+<h3 id="generador-independiente-por-hilo">Generador independiente por hilo</h3>
+<pre><code class="language-cpp">std::mt19937 gen(seed + tid * 7919);
+</code></pre>
+<p>Cada hilo usa una semilla distinta para evitar secuencias correlacionadas.</p>
+<h3 id="distribucion-uniforme-estandar">Distribución uniforme estándar</h3>
+<pre><code class="language-cpp">std::uniform_real_distribution&lt;double&gt; dist(lim_inf, lim_sup);
+</code></pre>
+<h3 id="paralelizacion-del-bucle-principal">Paralelización del bucle principal</h3>
+<pre><code class="language-cpp">#pragma omp for reduction(+: suma_final, suma_final2)
+for (int i = 0; i &lt; N; i++) {
+    ...
+}
+</code></pre>
+<h3 id="medicion-de-tiempo-paralelo">Medición de tiempo paralelo</h3>
+<pre><code class="language-cpp">double t1 = omp_get_wtime();
+double t2 = omp_get_wtime();
+</code></pre>
+<h3 id="observaciones">Observaciones</h3>
+<ul>
+<li>El paralelismo es de tipo <strong>data-parallel</strong>: cada hilo procesa puntos diferentes.  </li>
+<li><code>reduction</code> garantiza acumulación correcta.  </li>
+<li>OpenMP es ideal para máquinas de múltiples núcleos en un solo nodo.</li>
+</ul>
+<hr />
+<h2 id="paralelizacion-con-memoria-distribuida-mpi">Paralelización con memoria distribuida (MPI)</h2>
+<p>La versión MPI reparte la carga de trabajo entre procesos independientes, cada uno con su propio espacio de memoria.</p>
+<h3 id="division-del-trabajo">División del trabajo</h3>
+<pre><code class="language-cpp">int nlocal = N / size;
+if (rank &lt; rest) nlocal++;
+</code></pre>
+<h3 id="semilla-distinta-por-proceso">Semilla distinta por proceso</h3>
+<pre><code class="language-cpp">std::mt19937 gen(seed + rank*1234567);
+</code></pre>
+<h3 id="reduccion-de-resultados">Reducción de resultados</h3>
+<pre><code class="language-cpp">MPI_Reduce(&amp;suma_local, &amp;suma_global, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+MPI_Reduce(&amp;suma_cuadrados_local, &amp;suma_cuadrados_global, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+</code></pre>
+<h3 id="medicion-del-tiempo-distribuido">Medición del tiempo distribuido</h3>
+<pre><code class="language-cpp">double t1 = MPI_Wtime();
+double t2 = MPI_Wtime();
+</code></pre>
+<h3 id="observaciones_1">Observaciones</h3>
+<ul>
+<li>MPI escala mejor en clusters o sistemas multinodo.  </li>
+<li>El proceso 0 combina los resultados y produce la salida final.  </li>
+<li>Para tamaños pequeños de N, el overhead de comunicación puede dominar.</li>
+</ul>
+<hr />
+<h2 id="metricas-de-rendimiento-y-escalabilidad">Métricas de rendimiento y escalabilidad</h2>
+<p>Para evaluar el desempeño de OpenMP y MPI se usan las métricas estándar:</p>
+<h3 id="speedup">Speedup</h3>
+<div class="arithmatex">\[
+S(p) = \frac{T_1}{T_p}
+\]</div>
+<h3 id="eficiencia">Eficiencia</h3>
+<div class="arithmatex">\[
+E(p) = \frac{S(p)}{p}
+\]</div>
+<h3 id="escalamiento-fuerte">Escalamiento fuerte</h3>
+<p>El tamaño del problema <span class="arithmatex">\(N\)</span> es constante y se aumenta el número de hilos/procesos.</p>
+<h3 id="escalamiento-debil">Escalamiento débil</h3>
+<p>Se incrementa <span class="arithmatex">\(N\)</span> proporcionalmente al número de hilos/procesos, manteniendo el trabajo por unidad constante.</p>
+<hr />
+<h2 id="consideraciones-adicionales">Consideraciones adicionales</h2>
+<h3 id="reproducibilidad">Reproducibilidad</h3>
+<ul>
+<li>OpenMP:<br />
+<code>cpp
+  seed + tid * 7919</code></li>
+<li>MPI:<br />
+<code>cpp
+  seed + rank * 1234567</code></li>
+</ul>
+<h3 id="estabilidad-numerica">Estabilidad numérica</h3>
+<ul>
+<li>Usar <code>double</code> para acumuladores.  </li>
+<li>Reducir valores en paralelo usando <code>reduction</code> o <code>MPI_Reduce</code>.</li>
+</ul>
+<h3 id="observaciones-practicas-finales">Observaciones prácticas finales</h3>
+<ul>
+<li>OpenMP requiere menos cambios y es más eficiente para una sola máquina.  </li>
+<li>MPI es más escalable para computación distribuida.  </li>
+<li>Monte Carlo escala de forma casi ideal porque cada punto es independiente.</li>
+</ul>
+<hr />
 
 
 
