@@ -16,6 +16,7 @@ double func(const std::vector<double>& punto) {
 
 int main(int argc, char* argv[]) {
 
+    // Verificación de argumentos ingresados por el usuario
     if(argc != 9){
         std::cerr << "Usage: " << argv[0] << " --li [límite inferior] --ls [límite superior] --d [número de dimensiones] --n [interacciones]" << std::endl;
         exit(1);
@@ -23,7 +24,7 @@ int main(int argc, char* argv[]) {
 
     }
 
-    //Parámetros elegidos por el usuario
+    // Parámetros elegidos por el usuario
     double lim_inf, lim_sup;
 
     lim_inf = atof(argv[2]);
@@ -37,26 +38,28 @@ int main(int argc, char* argv[]) {
     // semilla
     unsigned int seed = 12345;
 
-    //Inicialización del ambiente MPI
+    // Inicialización del ambiente MPI
     int size, rank;
     MPI_Init(NULL, NULL);
 
     double time_1 = MPI_Wtime();
 
-    //Tamaño y rango
+    // Tamaño y rango
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    //Subdivisión del rango de trabajo
+    // Subdivisión del rango de trabajo
     int nlocal = N / size;
     int rest = N % size;
 
+    // Si N no es multiplo de size, se suma 1 a los procesos de rank menores
     if (rest && rank < rest){
     
     	nlocal++;
     
     }
 
+    // Valor de inicio de loop de cada proceso
     int start = nlocal * rank;
 
     if (rest && rank >= rest){
@@ -65,10 +68,11 @@ int main(int argc, char* argv[]) {
 
     }
 
+    // Valor de finalización de cada proceso
     int end = start + nlocal;
 
     // Generador Mersenne Twister 
-    std::mt19937 generador(seed + rank);
+    std::mt19937 generador(seed + rank*1234567);
     
     // Variables para el cálculo
     double suma_local = 0.0;
@@ -95,6 +99,7 @@ int main(int argc, char* argv[]) {
         suma_cuadrados_local += valor_final * valor_final;
     }
 
+    // Reducción de las sumas locales a sumas globales
     double suma_global, suma_cuadrados_global;
     
     MPI_Reduce(&suma_local, &suma_global, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
@@ -119,6 +124,8 @@ int main(int argc, char* argv[]) {
     // Estimación del error
     double error = volumen * std::sqrt(varianza / N);
 
+    // Impresión de resultados solo para proceso 0
+    if(rank == 0){
     // Resultados
     std::cout << "Dimensión que utilizaremos: " << dimensiones << std::endl;
     std::cout << "Número de puntos: " << N << std::endl;
@@ -129,7 +136,8 @@ int main(int argc, char* argv[]) {
     std::cout << "Varianza de f: " << varianza << std::endl;
     std::cout << "Escala del error: O(N^{-1/2})" << std::endl;
     std::cout << "Tiempo: " << time_2 - time_1 << std::endl;
-    
+    }
+
     MPI_Finalize();
 
     return 0;
