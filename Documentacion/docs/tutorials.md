@@ -1,4 +1,4 @@
-# Tutorials
+# Ejemplo de uso
 
 Este documento explica cómo ejecutar, modificar y acelerar el programa de integración Monte Carlo usando sus cuatro versiones: secuencial interactiva, secuencial con argumentos, paralela con OpenMP y paralela con MPI. También incluye todos los experimentos necesarios para cumplir los milestones del proyecto.
 
