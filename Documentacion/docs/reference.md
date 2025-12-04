@@ -35,7 +35,9 @@ double func(const std::vector<double>& punto);
 
 Evalúa:
 
-\[ f(x) = e^{-(x_1^2 + `\dots `{=tex}+ x_d\^2)} \]
+$$
+f(x) = e^{-(x_1^2 + \dots + x_d^2)}
+$$
 
 ------------------------------------------------------------------------
 
@@ -60,26 +62,36 @@ punto[d] = lim_inf + (lim_sup - lim_inf) * r;
 
 Promedio:
 
-\[ `\bar`{=tex}{f} = `\frac{1}{N}`{=tex} `\sum `{=tex}f(x_i) \]
+$$
+\bar{f} = \frac{1}{N}\sum_{i=1}^{N} f(x_i)
+$$
+
 
 Volumen del espacio:
 
-\[ V = (`\text{ls}`{=tex}-`\text{li}`{=tex})\^d \]
+$$
+V = (\text{ls} - \text{li})^d
+$$
 
 Integral estimada:
 
-\[ I `\approx `{=tex}`\bar`{=tex}{f} `\cdot `{=tex}V \]
+$$
+I \approx \bar{f} \cdot V
+$$
 
 Error estadístico:
 
-\[ `\text{error}`{=tex} = V`\sqrt{\frac{\mathrm{Var}(f)}{N}}`{=tex} \]
+$$
+\text{error} = V \sqrt{\frac{\mathrm{Var}(f)}{N}}
+$$
 
 ------------------------------------------------------------------------
 
 ## Cálculo de varianza
 
-\[ `\mathrm{Var}`{=tex}(f) = `\langle `{=tex}f\^2`\rangle `{=tex}-
-`\langle `{=tex}f`\rangle`{=tex}\^2 \]
+$$
+\mathrm{Var}(f) = \langle f^2 \rangle - \langle f \rangle^2
+$$
 
 En código:
 
