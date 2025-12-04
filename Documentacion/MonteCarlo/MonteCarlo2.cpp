@@ -16,7 +16,7 @@ double func(const std::vector<double>& punto) {
 int main() {
     // aquí elijo los parámetros de todo y todo el código se ajusta a estos
     int N = 10000000;          // Número de puntos
-    int dimensiones = 3;       // Número de dimensiones
+    int dimensiones = 5;       // Número de dimensiones
     double lim_inf = 0.0;      // Límite inferior
     double lim_sup = 1.0;      // Límite superior
     

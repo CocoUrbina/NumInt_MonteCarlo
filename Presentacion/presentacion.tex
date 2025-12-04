@@ -6,7 +6,7 @@
 \usetheme{Madrid} % Tema base
 \usecolortheme{seahorse} % Paleta de colores
 \usefonttheme{professionalfonts}
-
+\usepackage{graphicx}
 % Colores personalizados
 \definecolor{maincolor}{RGB}{0,90,150}
 \definecolor{secondary}{RGB}{200,40,40}
@@ -28,7 +28,7 @@ Isao Núñez Okubo
 \institute{Universidad de Costa Rica}
 \date{\today}
 
-% Logo (opcional, coloca tu archivo logo.png en el proyecto Overleaf)
+% Logo (opcional)
 % \titlegraphic{\includegraphics[width=2cm]{logo.png}}
 
 % ====================
@@ -37,12 +37,16 @@ Isao Núñez Okubo
 \setbeamertemplate{footline}{
   \leavevmode%
   \hbox{%
-  \begin{beamercolorbox}[wd=.7\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+  \begin{beamercolorbox}[wd=.6\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
     \usebeamerfont{author in head/foot}\hspace{2mm}\insertshortauthor
   \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-    \usebeamerfont{date in head/foot}\insertshorttitle \hspace{2mm}
-  \end{beamercolorbox}}%
+  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertframenumber/\inserttotalframenumber\hspace{2mm}
+  \end{beamercolorbox}%
+  }%
   \vskip0pt%
 }
 
@@ -79,7 +83,6 @@ Isao Núñez Okubo
         \item Acelerar el método usando memoria compartida y memoria distribuida.
         \item Estudiar la escalabilidad del método.
       \end{itemize}
-    \item Nota: en clase se vio una versión de ``Monte Carlo de punto medio'', pero en el proyecto se implementa la variante estándar por muestreo uniforme directo, que es la adecuada para paralelización.
   \end{itemize}
 \end{frame}
 
@@ -97,7 +100,7 @@ Isao Núñez Okubo
     \[
       \hat{I}_N = V\,\frac{1}{N}\sum_{i=1}^N f(\mathbf{X}_i).
     \]
-    \item Ventaja: el error decrece como $N^{-1/2}$ y no depende de la dimensión.
+    \item Ventaja: el error decrece como $N^{-1/2}$ y no explota con la dimensión.
   \end{itemize}
 \end{frame}
 
@@ -136,22 +139,20 @@ Isao Núñez Okubo
   \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Código principal del método}
+\begin{frame}{Código principal del método}
   \small
-\begin{verbatim}
-for (int i = 0; i < N; i++) {
-    std::vector<double> punto(dimensiones);
-    for (int d = 0; d < dimensiones; d++) {
-        double r = double(generador()) /
-                   double(generador.max());
-        punto[d] = lim_inf + (lim_sup - lim_inf)*r;
-    }
-
-    double valor_final = func(punto);
-    suma_final  += valor_final;
-    suma_final2 += valor_final*valor_final;
-}
-\end{verbatim}
+  \begin{block}{Bucle de Monte Carlo }
+    \texttt{for (int i = 0; i < N; i++) \{}\\
+    \texttt{\quad std::vector<double> punto(dimensiones);}\\
+    \texttt{\quad for (int d = 0; d < dimensiones; d++) \{}\\
+    \texttt{\quad\quad double r = double(generador()) / generador.max();}\\
+    \texttt{\quad\quad punto[d] = lim\_inf + (lim\_sup - lim\_inf)*r;}\\
+    \texttt{\quad\}}\\[2pt]
+    \texttt{\quad double valor = func(punto);}\\
+    \texttt{\quad suma\_final  += valor;}\\
+    \texttt{\quad suma\_final2 += valor * valor;}\\
+    \texttt{\}}
+  \end{block}
 \end{frame}
 
 \begin{frame}{Cálculo de la integral y del error}
@@ -162,8 +163,7 @@ for (int i = 0; i < N; i++) {
     \]
     \item Varianza:
     \[
-      \hat{\sigma}^2 = \mathbb{E}[f^2] - (\mathbb{E}[f])^2
-      \approx \frac{1}{N}\sum f(\mathbf{x}_i)^2 - \hat{f}^2.
+      \hat{\sigma}^2 \approx \frac{1}{N}\sum_{i=1}^N f(\mathbf{x}_i)^2 - \hat{f}^2.
     \]
     \item Integral estimada:
     \[
@@ -176,353 +176,235 @@ for (int i = 0; i < N; i++) {
   \end{itemize}
 \end{frame}
 
-% ====================
-\section{Versión interactiva}
-% ====================
-
-\begin{frame}[fragile]{Versión con argumentos de línea de comandos}
-  \begin{itemize}
-    \item El programa permite elegir parámetros desde la terminal:
-  \end{itemize}
-
-\begin{verbatim}
-./mc --li 0 --ls 1 --d 3 --n 5000000
-\end{verbatim}
-
-  \begin{itemize}
-    \item Parámetros:
-      \begin{itemize}
-        \item \texttt{--li}: límite inferior.
-        \item \texttt{--ls}: límite superior.
-        \item \texttt{--d}: número de dimensiones.
-        \item \texttt{--n}: número de puntos N.
-      \end{itemize}
-    \item Esta versión facilita:
-      \begin{itemize}
-        \item barrer distintos valores de $N$,
-        \item cambiar dimensión $d$,
-        \item automatizar experimentos para medir tiempos.
-      \end{itemize}
-  \end{itemize}
-\end{frame}
-
-% ====================
-\section{Paralelización (espacios)}
-% ====================
-
-\begin{frame}{Memoria compartida (espacio reservado)}
-  \textbf{Aquí debe ir la parte de memoria compartida.}
-
-  Sugerencias de contenido:
-  \begin{itemize}
-    \item Explicar la idea de paralelizar el ciclo de Monte Carlo usando hilos.
-    \item Mostrar brevemente el uso de OpenMP (por ejemplo, \texttt{\#pragma omp parallel for}).
-    \item Comentar el uso de \texttt{reduction} para \texttt{suma\_final} y \texttt{suma\_final2}.
-    \item Presentar tiempos de ejecución con 1, 2, 4, 8 hilos y el speedup observado.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Memoria distribuida (espacio reservado)}
-  \textbf{Aquí debe ir la parte de memoria distribuida.}
-
-  Sugerencias de contenido:
-  \begin{itemize}
-    \item Describir cómo se reparte el total de $N$ puntos entre varios procesos.
-    \item Explicar el uso de MPI: cada proceso calcula una parte de la suma.
-    \item Mencionar funciones como \texttt{MPI\_Reduce} para combinar resultados.
-    \item Discutir el impacto de la comunicación entre procesos.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Escalabilidad (espacio reservado)}
-  \textbf{Aquí debe ir el análisis de escalabilidad.}
-
-  Sugerencias de contenido:
-  \begin{itemize}
-    \item Definir speedup: $S(p) = T(1)/T(p)$.
-    \item Definir eficiencia: $E(p) = S(p)/p$.
-    \item Mostrar alguna tabla o gráfica con tiempos para distintos números de hilos/procesos.
-    \item Comparar comportamiento en memoria compartida vs. distribuida.
-  \end{itemize}
-\end{frame}
-
-% ====================
-\section{Conclusiones}
-% ====================
-
-\begin{frame}{Conclusiones del proyecto}
-  \begin{itemize}
-    \item El método de Monte Carlo es adecuado para integrales multidimensionales.
-    \item La implementación secuencial sirve como referencia para el análisis de rendimiento.
-    \item La paralelización en memoria compartida y distribuida permite reducir significativamente el tiempo de cómputo.
-    \item El estudio de la escalabilidad muestra los límites prácticos de la aceleración.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Gracias}
-  \centering
-  ¡Preguntas?
-\end{frame}
-
-\end{document}
-\documentclass{beamer}
-
-% ====================
-% TEMAS Y COLORES
-% ====================
-\usetheme{Madrid} % Tema base
-\usecolortheme{seahorse} % Paleta de colores
-\usefonttheme{professionalfonts}
-
-% Colores personalizados
-\definecolor{maincolor}{RGB}{0,90,150}
-\definecolor{secondary}{RGB}{200,40,40}
-
-\setbeamercolor{structure}{fg=maincolor} % títulos y bullets
-\setbeamercolor{frametitle}{fg=white,bg=maincolor}
-\setbeamercolor{title}{fg=white,bg=maincolor}
-\setbeamercolor{footline}{bg=maincolor, fg=white}
-
-% ====================
-% DATOS DE LA PRESENTACIÓN
-% ====================
-\title[Física Computacional]{Aceleración de la técnica de Monte Carlo para integración numérica usando memoria compartida y memoria distribuida}
-%\subtitle{Plantilla personalizada en Overleaf}
-\author[]{Edwin Urbina Quiroz\\
-Ervin Villalta Cáceres\\
-Isao Núñez Okubo
-}
-\institute{Universidad de Costa Rica}
-\date{\today}
-
-% Logo (opcional, coloca tu archivo logo.png en el proyecto Overleaf)
-% \titlegraphic{\includegraphics[width=2cm]{logo.png}}
-
-% ====================
-% PIE DE PÁGINA
-% ====================
-\setbeamertemplate{footline}{
-  \leavevmode%
-  \hbox{%
-  \begin{beamercolorbox}[wd=.7\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
-    \usebeamerfont{author in head/foot}\hspace{2mm}\insertshortauthor
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-    \usebeamerfont{date in head/foot}\insertshorttitle \hspace{2mm}
-  \end{beamercolorbox}}%
-  \vskip0pt%
-}
-
-% Quitar barra de navegación
-\setbeamertemplate{navigation symbols}{}
-
-\begin{document}
-
-% ====================
-% PORTADA
-% ====================
-\begin{frame}
-  \titlepage
-\end{frame}
-
-% ====================
-% TABLA DE CONTENIDOS
-% ====================
-\begin{frame}{Contenido}
-  \tableofcontents
-\end{frame}
-
-% ====================
-\section{Introducción}
-% ====================
-
-\begin{frame}{Motivación del proyecto}
-  \begin{itemize}
-    \item La integración numérica tradicional se vuelve muy costosa en altas dimensiones.
-    \item La técnica de Monte Carlo reduce este costo usando muestreo aleatorio.
-    \item Objetivo del proyecto:
-      \begin{itemize}
-        \item Implementar la integración de Monte Carlo multidimensional.
-        \item Acelerar el método usando memoria compartida y memoria distribuida.
-        \item Estudiar la escalabilidad del método.
-      \end{itemize}
-    \item Nota: en clase se vio una versión de ``Monte Carlo de punto medio'', pero en el proyecto se implementa la variante estándar por muestreo uniforme directo, que es la adecuada para paralelización.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Idea general del método}
-  \begin{itemize}
-    \item Se desea calcular una integral multidimensional:
-    \[
-      I = \int_{[a,b]^d} f(\mathbf{x})\, d\mathbf{x}.
-    \]
-    \item Se reescribe como valor esperado:
-    \[
-      I = V\,\mathbb{E}[f(\mathbf{X})], \quad V = (b-a)^d.
-    \]
-    \item Aproximación por Monte Carlo:
-    \[
-      \hat{I}_N = V\,\frac{1}{N}\sum_{i=1}^N f(\mathbf{X}_i).
-    \]
-    \item Ventaja: el error decrece como $N^{-1/2}$ y no depende de la dimensión.
-  \end{itemize}
-\end{frame}
-
-% ====================
-\section{Implementación secuencial}
-% ====================
-
-\begin{frame}{Función objetivo utilizada}
-  \begin{itemize}
-    \item Se toma como función de prueba:
-    \[
-      f(\mathbf{x}) = \exp\left(-\sum_{i=1}^d x_i^2\right).
-    \]
-    \item Aparición en:
-      \begin{itemize}
-        \item física estadística,
-        \item probabilidad multivariada,
-        \item integrales gaussianas en altas dimensiones.
-      \end{itemize}
-    \item Es una función suave y bien comportada para estudiar convergencia y error.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Generación de puntos aleatorios}
-  \begin{itemize}
-    \item Se usa el generador \texttt{std::mt19937} (Mersenne Twister).
-    \item Se genera un uniforme en $[0,1]$:
-    \[
-      r = \frac{\texttt{generador()}}{\texttt{generador.max()}}.
-    \]
-    \item Se escala al intervalo $[a,b]$:
-    \[
-      x_i = a + (b-a)\, r.
-    \]
-    \item El proceso se repite para cada dimensión y para cada punto.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Código principal del método}
+\begin{frame}{Cálculos}
   \small
-\begin{verbatim}
-for (int i = 0; i < N; i++) {
-    std::vector<double> punto(dimensiones);
-    for (int d = 0; d < dimensiones; d++) {
-        double r = double(generador()) /
-                   double(generador.max());
-        punto[d] = lim_inf + (lim_sup - lim_inf)*r;
-    }
+  \begin{block}{}
+    \texttt{// Cálculos finales}\\
+    \texttt{double promedio = suma\_final / N;}\\
+    \texttt{double promedio\_cuadrado = suma\_final2 / N;}\\
+    \texttt{double varianza = promedio\_cuadrado - promedio * promedio;}\\[4pt]
 
-    double valor_final = func(punto);
-    suma_final  += valor_final;
-    suma_final2 += valor_final*valor_final;
-}
-\end{verbatim}
+    \texttt{// Volumen}\\
+    \texttt{double volumen = 1.0;}\\
+    \texttt{for (int d = 0; d < dimensiones; d++) \{}\\
+    \texttt{\quad volumen *= (lim\_sup - lim\_inf);}\\
+    \texttt{\}}\\[4pt]
+
+    \texttt{// Estimación de la integral}\\
+    \texttt{double integral = promedio * volumen;}\\[4pt]
+
+    \texttt{// Estimación del error}\\
+    \texttt{double error = volumen * std::sqrt(varianza / N);}
+  \end{block}
 \end{frame}
 
-\begin{frame}{Cálculo de la integral y del error}
-  \begin{itemize}
-    \item Promedio:
-    \[
-      \hat{f} = \frac{1}{N}\sum_{i=1}^N f(\mathbf{x}_i).
-    \]
-    \item Varianza:
-    \[
-      \hat{\sigma}^2 = \mathbb{E}[f^2] - (\mathbb{E}[f])^2
-      \approx \frac{1}{N}\sum f(\mathbf{x}_i)^2 - \hat{f}^2.
-    \]
-    \item Integral estimada:
-    \[
-      I \approx V \hat{f}.
-    \]
-    \item Error estadístico:
-    \[
-      \Delta I = V\sqrt{\frac{\hat{\sigma}^2}{N}}.
-    \]
-  \end{itemize}
-\end{frame}
 
 % ====================
 \section{Versión interactiva}
 % ====================
 
-\begin{frame}[fragile]{Versión con argumentos de línea de comandos}
+\begin{frame}{Versión con argumentos de línea de comandos}
   \begin{itemize}
     \item El programa permite elegir parámetros desde la terminal:
-  \end{itemize}
-
-\begin{verbatim}
-./mc --li 0 --ls 1 --d 3 --n 5000000
-\end{verbatim}
-
-  \begin{itemize}
+    \[
+      \texttt{./mc --li 0 --ls 1 --d 3 --n 5000000}
+    \]
     \item Parámetros:
       \begin{itemize}
         \item \texttt{--li}: límite inferior.
         \item \texttt{--ls}: límite superior.
         \item \texttt{--d}: número de dimensiones.
-        \item \texttt{--n}: número de puntos N.
+        \item \texttt{--n}: número de puntos $N$.
       \end{itemize}
     \item Esta versión facilita:
       \begin{itemize}
         \item barrer distintos valores de $N$,
         \item cambiar dimensión $d$,
-        \item automatizar experimentos para medir tiempos.
+        \item automatizar experimentos para medir tiempos y error.
       \end{itemize}
   \end{itemize}
 \end{frame}
 
 % ====================
-\section{Paralelización (espacios)}
+\section{Paralelización}
 % ====================
 
-\begin{frame}{Memoria compartida (espacio reservado)}
-  \textbf{Aquí debe ir la parte de memoria compartida.}
+\begin{frame}{Código Memoria Compartida}
+  \small
+  \begin{block}{}
+    \texttt{double suma\_final = 0.0;}\\
+    \texttt{double suma\_final2 = 0.0;}\\
+    \texttt{double time\_1 = omp\_get\_wtime();}\\
+    \texttt{int num\_procs;}\\
+    \texttt{\#pragma omp parallel}\\
+    \texttt{\{}\\
 
-  Sugerencias de contenido:
+  \end{block}
+\end{frame}
+\begin{frame}{Memoria Compartida}
+  \small
+  \begin{block}{}
+    \texttt{\quad int num\_procs = omp\_get\_thread\_num();}\\
+    \texttt{\quad std::mt19937 generador(seed + num\_procs * 7919);}\\
+    \texttt{\quad std::uniform\_real\_distribution<double> dist(lim_inf, lim_sup);}\\
+    \texttt{\quad std::vector<double> punto(dimensiones);}\\
+    \texttt{\quad \#pragma omp single}\\
+    \texttt{\quad num\_procs = omp\_get\_num\_threads(); }\\
+    \texttt{\quad \#pragma omp for reduction (+: suma\_final, suma\_final2)}\\
+    \texttt{\quad or (int i = 0; i < N; i++) \{}\\
+    \texttt{\quad\quad for (int d = 0; d < dimensiones; d++) \{}\\
+    \texttt{\quad\quad\quad punto[d] = dist(generador);}\\
+    \texttt{\quad\quad \}}\\
+    \texttt{\quad\quad double val = func(punto);}\\
+    \texttt{\quad\quad suma\_final  += val;}\\
+    \texttt{\quad\quad suma\_final2 += val * val; }\\
+  \end{block}
+\end{frame}
+\begin{frame}{Escalabilidad en memoria compartida}
   \begin{itemize}
-    \item Explicar la idea de paralelizar el ciclo de Monte Carlo usando hilos.
-    \item Mostrar brevemente el uso de OpenMP (por ejemplo, \texttt{\#pragma omp parallel for}).
-    \item Comentar el uso de \texttt{reduction} para \texttt{suma\_final} y \texttt{suma\_final2}.
-    \item Presentar tiempos de ejecución con 1, 2, 4, 8 hilos y el speedup observado.
+    \item Se define el \textbf{speedup}:
+    \[
+      S(p) = \frac{T_1}{T_p},
+    \]
+    donde $T_1$ es el tiempo con 1 hilo y $T_p$ con $p$ hilos.
+    \item La \textbf{eficiencia} se define como:
+    \[
+      E(p) = \frac{S(p)}{p}.
+    \]
+    \item Para $N$ grande, el método Monte Carlo escala bien con OpenMP (gran parte del tiempo está en el bucle paralelo).
+    \item Factores que limitan la eficiencia:
+      \begin{itemize}
+        \item partes secuenciales del código,
+        \item overhead de creación y sincronización de hilos.
+      \end{itemize}
+  \end{itemize}
+
+  \vspace{0.4cm}
+\end{frame}  % <-- ESTE FALTABA
+
+
+\begin{frame}{Gráfico de escalabilidad (Memoria compartida)}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Esc_MC.pdf} % <-- sin extensión
+    %\caption{Descripción de la imagen.}
+    \label{fig:mi_imagen}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Memoria distribuida (MPI)}
+  \begin{itemize}
+    \item Llamada inicial: \texttt{MPI\_Init(NULL, NULL);}  
+    \item Determinar número de procesos y el identificador de cada uno:  
+      \begin{itemize}
+        \item \texttt{MPI\_Comm\_size(MPI\_COMM\_WORLD, \&size);}  \hfill // número total de procesos  
+        \item \texttt{MPI\_Comm\_rank(MPI\_COMM\_WORLD, \&rank);}  \hfill // id del proceso [0, size−1]  
+      \end{itemize}
+    \item Registrar tiempo de inicio: \texttt{double time\_start = MPI\_Wtime();}  
+    \item Los parámetros globales (como número total de muestras \(N\), límites del intervalo, dimensión \(d\), semilla) se leen una sola vez — usualmente por el proceso con \texttt{rank == 0} — y pueden ser compartidos si se desea.  
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Memoria distribuida (espacio reservado)}
-  \textbf{Aquí debe ir la parte de memoria distribuida.}
 
-  Sugerencias de contenido:
+\begin{frame}{MPI: División del trabajo entre procesos}
   \begin{itemize}
-    \item Describir cómo se reparte el total de $N$ puntos entre varios procesos.
-    \item Explicar el uso de MPI: cada proceso calcula una parte de la suma.
-    \item Mencionar funciones como \texttt{MPI\_Reduce} para combinar resultados.
-    \item Discutir el impacto de la comunicación entre procesos.
+    \item El número total de muestras \(N\) se reparte entre los procesos:
+    \[
+      N_r = \left\lfloor \frac{N}{\text{size}} \right\rfloor
+    \]
+    donde \texttt{size} es el total de procesos y \texttt{rank} el identificador del proceso.
+    
+    \item Cada proceso calcula su número local de puntos \texttt{N\_local}:
+    \[
+      \texttt{N\_local = N / size}
+    \]
+
+    \item Si \(N\) no es múltiplo de \text{size}, el proceso 0 puede procesar los puntos sobrantes:
+    \[
+      N_0 = N_r + (N \bmod \text{size})
+    \]
+
+    \item Con esta estrategia:
+      \begin{itemize}
+        \item cada proceso trabaja de forma independiente,
+        \item se minimiza comunicación durante el cálculo,
+        \item la carga computacional queda balanceada.
+      \end{itemize}
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Escalabilidad (espacio reservado)}
-  \textbf{Aquí debe ir el análisis de escalabilidad.}
-
-  Sugerencias de contenido:
+\begin{frame}{MPI: Process Safety}
   \begin{itemize}
-    \item Definir speedup: $S(p) = T(1)/T(p)$.
-    \item Definir eficiencia: $E(p) = S(p)/p$.
-    \item Mostrar alguna tabla o gráfica con tiempos para distintos números de hilos/procesos.
-    \item Comparar comportamiento en memoria compartida vs. distribuida.
+    \item Cada proceso genera sus propios puntos aleatorios dentro del intervalo \([a,b]\).
+    \item Se usa una semilla distinta para cada proceso:
+    \[
+      \texttt{std::mt19937 gen(seed + rank \cdot 1234567);}
+    \]
+
+    \item Cada proceso acumula:
+      \[
+        S_r = \sum f(\mathbf{x}_i), \qquad Q_r = \sum f(\mathbf{x}_i)^2
+      \]
+      donde \(S_r\) y \(Q_r\) son las sumas locales.
+    \item Esta etapa es completamente independiente → **no requiere comunicación**, lo que favorece la escalabilidad.
   \end{itemize}
 \end{frame}
 
+
+\begin{frame}{Memoria distribuida (MPI)}
+  \begin{itemize}
+    \item En  resumen, la versión con MPI, el trabajo se reparte entre varios procesos con memoria independiente.
+    \item Cada proceso calcula una fracción de los $N$ puntos:
+    \[
+      N = \sum_{r=0}^{p-1} N_r, \quad N_r \approx \frac{N}{p}.
+    \]
+    \item Se usan semillas distintas por proceso:
+    \[
+      \texttt{std::mt19937 gen(seed + rank * 1234567);}
+    \]
+    \item Cada proceso obtiene sus sumas locales $\texttt{suma\_local}$, $\texttt{suma\_cuadrados\_local}$.
+    \item El proceso 0 combina los resultados con \texttt{MPI\_Reduce} y calcula la integral global.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Escalabilidad en memoria distribuida}
+  \begin{itemize}
+    \item Speedup en MPI:
+    \[
+      S(p) = \frac{T_1}{T_p},
+    \]
+    con $T_p$ el tiempo usando $p$ procesos.
+    \item Eficiencia:
+    \[
+      E(p) = \frac{S(p)}{p}.
+    \]
+    \item Para valores grandes de $N$, el costo de comunicación es pequeño frente al costo de cómputo y se logra buen escalamiento.
+    \item Para $N$ pequeños, el overhead de comunicación y sincronización puede reducir el speedup.
+  \end{itemize}
+
+  \vspace{0.4cm}
+
+\end{frame}
+
+\begin{frame}{Gráfico de escalabilidad (Memoria compartida)}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Esc_MD} % <-- sin extensión
+    %\caption{Descripción de la imagen.}
+    \label{fig:mi_imagen}
+  \end{figure}
+\end{frame}
 % ====================
 \section{Conclusiones}
 % ====================
 
 \begin{frame}{Conclusiones del proyecto}
   \begin{itemize}
-    \item El método de Monte Carlo es adecuado para integrales multidimensionales.
-    \item La implementación secuencial sirve como referencia para el análisis de rendimiento.
-    \item La paralelización en memoria compartida y distribuida permite reducir significativamente el tiempo de cómputo.
-    \item El estudio de la escalabilidad muestra los límites prácticos de la aceleración.
+    \item El método de Monte Carlo es adecuado para integrales multidimensionales debido a que el error estadístico no depende fuertemente de la dimensión.
+    \item La implementación secuencial sirve como referencia para comparar rendimiento y precisión.
+    \item La paralelización en memoria compartida (OpenMP) permite aprovechar eficientemente los núcleos de un solo nodo.
+    \item La paralelización en memoria distribuida (MPI) extiende el método a clústeres y múltiples nodos.
+    \item El análisis de escalabilidad muestra hasta dónde se puede acelerar el algoritmo antes de que dominen los costos de comunicación y sincronización.
   \end{itemize}
 \end{frame}
 
@@ -532,4 +414,3 @@ for (int i = 0; i < N; i++) {
 \end{frame}
 
 \end{document}
-

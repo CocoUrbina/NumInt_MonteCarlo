@@ -15,16 +15,19 @@
         <link rel="next" href="../tutorials/">
       
       
+        
+      
+      
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>Reference - Numerical Integration Monte Carlo</title>
+        <title>Documentación - Integración Numérica de MonteCarlo</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.2a3383ac.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
       
       
 
@@ -51,7 +54,6 @@
 
     
     
-    
   </head>
   
   
@@ -64,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#MonteCarlo.MonteCarlo" class="md-skip">
+        <a href="#documentacion" class="md-skip">
           Skip to content
         </a>
       
@@ -80,7 +82,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Numerical Integration Monte Carlo" class="md-header__button md-logo" aria-label="Numerical Integration Monte Carlo" data-md-component="logo">
+    <a href=".." title="Integración Numérica de MonteCarlo" class="md-header__button md-logo" aria-label="Integración Numérica de MonteCarlo" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -94,13 +96,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Numerical Integration Monte Carlo
+            Integración Numérica de MonteCarlo
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Reference
+              Documentación
             
           </span>
         </div>
@@ -138,13 +140,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Numerical Integration Monte Carlo" class="md-nav__button md-logo" aria-label="Numerical Integration Monte Carlo" data-md-component="logo">
+    <a href=".." title="Integración Numérica de MonteCarlo" class="md-nav__button md-logo" aria-label="Integración Numérica de MonteCarlo" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Numerical Integration Monte Carlo
+    Integración Numérica de MonteCarlo
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -161,9 +163,14 @@
   
   
   <span class="md-ellipsis">
-    Bienvenidos
+    
+  
+    Introducción
+  
+
     
   </span>
+  
   
 
       </a>
@@ -183,9 +190,14 @@
   
   
   <span class="md-ellipsis">
-    Explanation
+    
+  
+    Explicación del proyecto: Integración Monte Carlo secuencial y paralela (OpenMP + MPI)
+  
+
     
   </span>
+  
   
 
       </a>
@@ -206,15 +218,22 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   
   <span class="md-ellipsis">
-    Reference
+    
+  
+    Documentación
+  
+
     
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -225,9 +244,14 @@
   
   
   <span class="md-ellipsis">
-    Reference
+    
+  
+    Documentación
+  
+
     
   </span>
+  
   
 
       </a>
@@ -238,6 +262,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -246,18 +272,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#MonteCarlo.MonteCarlo" class="md-nav__link">
+  <a href="#uso-de-la-linea-de-comando" class="md-nav__link">
     <span class="md-ellipsis">
-      MonteCarlo
+      
+        Uso de la línea de comando
+      
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#MonteCarlo.MonteCarlo.montecarlo" class="md-nav__link">
+  <a href="#argumentos" class="md-nav__link">
     <span class="md-ellipsis">
-      montecarlo
+      
+        Argumentos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcion-integrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función integrada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generacion-de-puntos-aleatorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generación de puntos aleatorios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estimacion-monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estimación Monte Carlo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calculo-de-varianza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cálculo de varianza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ------------------------------------------------------------------------
+      
     </span>
   </a>
   
@@ -283,9 +368,14 @@
   
   
   <span class="md-ellipsis">
-    Tutorials
+    
+  
+    Ejemplo de uso
+  
+
     
   </span>
+  
   
 
       </a>
@@ -310,6 +400,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -318,18 +410,77 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#MonteCarlo.MonteCarlo" class="md-nav__link">
+  <a href="#uso-de-la-linea-de-comando" class="md-nav__link">
     <span class="md-ellipsis">
-      MonteCarlo
+      
+        Uso de la línea de comando
+      
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#MonteCarlo.MonteCarlo.montecarlo" class="md-nav__link">
+  <a href="#argumentos" class="md-nav__link">
     <span class="md-ellipsis">
-      montecarlo
+      
+        Argumentos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcion-integrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función integrada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generacion-de-puntos-aleatorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generación de puntos aleatorios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estimacion-monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estimación Monte Carlo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calculo-de-varianza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cálculo de varianza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ------------------------------------------------------------------------
+      
     </span>
   </a>
   
@@ -345,155 +496,184 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
 
 
 
-  <h1>Reference</h1>
-
-<div class="doc doc-object doc-module">
-
-
-
-<a id="MonteCarlo.MonteCarlo"></a>
-    <div class="doc doc-contents first">
-
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-<div class="doc doc-object doc-function">
-
-
-<h2 id="MonteCarlo.MonteCarlo.montecarlo" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">montecarlo</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></code>
-
-</h2>
-
-
-    <div class="doc doc-contents ">
-
-        <p>Lorem Ipsum</p>
-
-
-<p><span class="doc-section-title">Examples:</span></p>
-    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">montecarlo</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="go">2.0</span>
-</code></pre></div>
-
-
-<p><span class="doc-section-title">Parameters:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Default</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                <code>x</code>
-            </td>
-            <td>
-                  <code><span title="float">float</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Argumento unico.</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-    <p><span class="doc-section-title">Returns:</span></p>
-    <table>
-      <thead>
-        <tr>
-<th>Name</th>          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-<td><code>aprox</code></td>            <td>
-                  <code><span title="float">float</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Valor aproximado de la integral.</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
-
-
-            <details class="quote">
-              <summary>Source code in <code>MonteCarlo/MonteCarlo.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">montecarlo</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Lorem Ipsum</span>
-
-<span class="sd">    Examples:</span>
-<span class="sd">        &gt;&gt;&gt; montecarlo(x)</span>
-<span class="sd">        2.0</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        x (float): Argumento unico.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        aprox (float): Valor aproximado de la integral.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-
-
-  </div>
-
-    </div>
-
-</div>
+<h1 id="documentacion">Documentación</h1>
+<p>Documentación técnica del programa de integración Monte Carlo.</p>
+<hr />
+<h2 id="uso-de-la-linea-de-comando">Uso de la línea de comando</h2>
+<p>El programa se ejecuta como:</p>
+<pre><code class="language-bash">./mc --li &lt;lim_inf&gt; --ls &lt;lim_sup&gt; --d &lt;dim&gt; --n &lt;puntos&gt;
+</code></pre>
+<h2 id="argumentos">Argumentos</h2>
+<table>
+<thead>
+<tr>
+<th>Argumento</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--li</code></td>
+<td>Límite inferior del intervalo</td>
+</tr>
+<tr>
+<td><code>--ls</code></td>
+<td>Límite superior</td>
+</tr>
+<tr>
+<td><code>--d</code></td>
+<td>Número de dimensiones</td>
+</tr>
+<tr>
+<td><code>--n</code></td>
+<td>Cantidad de puntos a generar</td>
+</tr>
+</tbody>
+</table>
+<p>Ejemplo:</p>
+<pre><code class="language-bash">./mc --li -2 --ls 2 --d 4 --n 500000
+</code></pre>
+<hr />
+<h2 id="funcion-integrada">Función integrada</h2>
+<pre><code class="language-cpp">double func(const std::vector&lt;double&gt;&amp; punto);
+</code></pre>
+<p>Evalúa:</p>
+<div class="arithmatex">\[
+f(x) = e^{-(x_1^2 + \dots + x_d^2)}
+\]</div>
+<hr />
+<h2 id="generacion-de-puntos-aleatorios">Generación de puntos aleatorios</h2>
+<p>El programa utiliza el generador Mersenne Twister:</p>
+<pre><code class="language-cpp">std::mt19937 generador(seed);
+double r = double(generador()) / generador.max();
+</code></pre>
+<p>Escalamiento al intervalo:</p>
+<pre><code class="language-cpp">punto[d] = lim_inf + (lim_sup - lim_inf) * r;
+</code></pre>
+<hr />
+<h2 id="estimacion-monte-carlo">Estimación Monte Carlo</h2>
+<p>Promedio:</p>
+<div class="arithmatex">\[
+\bar{f} = \frac{1}{N}\sum_{i=1}^{N} f(x_i)
+\]</div>
+<p>Volumen del espacio:</p>
+<div class="arithmatex">\[
+V = (\text{ls} - \text{li})^d
+\]</div>
+<p>Integral estimada:</p>
+<div class="arithmatex">\[
+I \approx \bar{f} \cdot V
+\]</div>
+<p>Error estadístico:</p>
+<div class="arithmatex">\[
+\text{error} = V \sqrt{\frac{\mathrm{Var}(f)}{N}}
+\]</div>
+<hr />
+<h2 id="calculo-de-varianza">Cálculo de varianza</h2>
+<div class="arithmatex">\[
+\mathrm{Var}(f) = \langle f^2 \rangle - \langle f \rangle^2
+\]</div>
+<p>Implementación:</p>
+<pre><code class="language-cpp">double varianza = promedio_cuadrado - promedio * promedio;
+</code></pre>
+<h2 id="-">------------------------------------------------------------------------</h2>
+<h1 id="paralelizacion-y-escalabilidad">Paralelización y Escalabilidad</h1>
+<p>A continuación se documentan las extensiones del programa que permiten acelerar la integración Monte Carlo mediante memoria compartida (OpenMP) y memoria distribuida (MPI).</p>
+<hr />
+<h2 id="paralelizacion-con-memoria-compartida-openmp">Paralelización con memoria compartida (OpenMP)</h2>
+<p>La versión paralela divide el bucle de Monte Carlo entre múltiples hilos que comparten memoria.</p>
+<h3 id="generador-independiente-por-hilo">Generador independiente por hilo</h3>
+<pre><code class="language-cpp">std::mt19937 gen(seed + tid * 7919);
+</code></pre>
+<p>Cada hilo usa una semilla distinta para evitar secuencias correlacionadas.</p>
+<h3 id="distribucion-uniforme-estandar">Distribución uniforme estándar</h3>
+<pre><code class="language-cpp">std::uniform_real_distribution&lt;double&gt; dist(lim_inf, lim_sup);
+</code></pre>
+<h3 id="paralelizacion-del-bucle-principal">Paralelización del bucle principal</h3>
+<pre><code class="language-cpp">#pragma omp for reduction(+: suma_final, suma_final2)
+for (int i = 0; i &lt; N; i++) {
+    ...
+}
+</code></pre>
+<h3 id="medicion-de-tiempo-paralelo">Medición de tiempo paralelo</h3>
+<pre><code class="language-cpp">double t1 = omp_get_wtime();
+double t2 = omp_get_wtime();
+</code></pre>
+<h3 id="observaciones">Observaciones</h3>
+<ul>
+<li>El paralelismo es de tipo <strong>data-parallel</strong>: cada hilo procesa puntos diferentes.  </li>
+<li><code>reduction</code> garantiza acumulación correcta.  </li>
+<li>OpenMP es ideal para máquinas de múltiples núcleos en un solo nodo.</li>
+</ul>
+<hr />
+<h2 id="paralelizacion-con-memoria-distribuida-mpi">Paralelización con memoria distribuida (MPI)</h2>
+<p>La versión MPI reparte la carga de trabajo entre procesos independientes, cada uno con su propio espacio de memoria.</p>
+<h3 id="division-del-trabajo">División del trabajo</h3>
+<pre><code class="language-cpp">int nlocal = N / size;
+if (rank &lt; rest) nlocal++;
+</code></pre>
+<h3 id="semilla-distinta-por-proceso">Semilla distinta por proceso</h3>
+<pre><code class="language-cpp">std::mt19937 gen(seed + rank*1234567);
+</code></pre>
+<h3 id="reduccion-de-resultados">Reducción de resultados</h3>
+<pre><code class="language-cpp">MPI_Reduce(&amp;suma_local, &amp;suma_global, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+MPI_Reduce(&amp;suma_cuadrados_local, &amp;suma_cuadrados_global, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+</code></pre>
+<h3 id="medicion-del-tiempo-distribuido">Medición del tiempo distribuido</h3>
+<pre><code class="language-cpp">double t1 = MPI_Wtime();
+double t2 = MPI_Wtime();
+</code></pre>
+<h3 id="observaciones_1">Observaciones</h3>
+<ul>
+<li>MPI escala mejor en clusters o sistemas multinodo.  </li>
+<li>El proceso 0 combina los resultados y produce la salida final.  </li>
+<li>Para tamaños pequeños de N, el overhead de comunicación puede dominar.</li>
+</ul>
+<hr />
+<h2 id="metricas-de-rendimiento-y-escalabilidad">Métricas de rendimiento y escalabilidad</h2>
+<p>Para evaluar el desempeño de OpenMP y MPI se usan las métricas estándar:</p>
+<h3 id="speedup">Speedup</h3>
+<div class="arithmatex">\[
+S(p) = \frac{T_1}{T_p}
+\]</div>
+<h3 id="eficiencia">Eficiencia</h3>
+<div class="arithmatex">\[
+E(p) = \frac{S(p)}{p}
+\]</div>
+<h3 id="escalamiento-fuerte">Escalamiento fuerte</h3>
+<p>El tamaño del problema <span class="arithmatex">\(N\)</span> es constante y se aumenta el número de hilos/procesos.</p>
+<h3 id="escalamiento-debil">Escalamiento débil</h3>
+<p>Se incrementa <span class="arithmatex">\(N\)</span> proporcionalmente al número de hilos/procesos, manteniendo el trabajo por unidad constante.</p>
+<hr />
+<h2 id="consideraciones-adicionales">Consideraciones adicionales</h2>
+<h3 id="reproducibilidad">Reproducibilidad</h3>
+<ul>
+<li>OpenMP:<br />
+<code>cpp
+  seed + tid * 7919</code></li>
+<li>MPI:<br />
+<code>cpp
+  seed + rank * 1234567</code></li>
+</ul>
+<h3 id="estabilidad-numerica">Estabilidad numérica</h3>
+<ul>
+<li>Usar <code>double</code> para acumuladores.  </li>
+<li>Reducir valores en paralelo usando <code>reduction</code> o <code>MPI_Reduce</code>.</li>
+</ul>
+<h3 id="observaciones-practicas-finales">Observaciones prácticas finales</h3>
+<ul>
+<li>OpenMP requiere menos cambios y es más eficiente para una sola máquina.  </li>
+<li>MPI es más escalable para computación distribuida.  </li>
+<li>Monte Carlo escala de forma casi ideal porque cada punto es independiente.</li>
+</ul>
+<hr />
 
 
 
@@ -542,10 +722,11 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
         <script src="../javascripts/mathjax.js"></script>
       

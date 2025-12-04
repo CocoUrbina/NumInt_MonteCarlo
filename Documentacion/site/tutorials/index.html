@@ -13,16 +13,19 @@
       
       
       
+        
+      
+      
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.21">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
     
     
       
-        <title>Tutorials - Numerical Integration Monte Carlo</title>
+        <title>Ejemplo de uso - Integración Numérica de MonteCarlo</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.2a3383ac.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
       
       
 
@@ -49,7 +52,6 @@
 
     
     
-    
   </head>
   
   
@@ -62,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ejemplos-de-uso" class="md-skip">
+        <a href="#ejemplo-de-uso" class="md-skip">
           Skip to content
         </a>
       
@@ -78,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Numerical Integration Monte Carlo" class="md-header__button md-logo" aria-label="Numerical Integration Monte Carlo" data-md-component="logo">
+    <a href=".." title="Integración Numérica de MonteCarlo" class="md-header__button md-logo" aria-label="Integración Numérica de MonteCarlo" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -92,13 +94,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Numerical Integration Monte Carlo
+            Integración Numérica de MonteCarlo
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Tutorials
+              Ejemplo de uso
             
           </span>
         </div>
@@ -136,13 +138,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Numerical Integration Monte Carlo" class="md-nav__button md-logo" aria-label="Numerical Integration Monte Carlo" data-md-component="logo">
+    <a href=".." title="Integración Numérica de MonteCarlo" class="md-nav__button md-logo" aria-label="Integración Numérica de MonteCarlo" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Numerical Integration Monte Carlo
+    Integración Numérica de MonteCarlo
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -159,9 +161,14 @@
   
   
   <span class="md-ellipsis">
-    Bienvenidos
+    
+  
+    Introducción
+  
+
     
   </span>
+  
   
 
       </a>
@@ -181,9 +188,14 @@
   
   
   <span class="md-ellipsis">
-    Explanation
+    
+  
+    Explicación del proyecto: Integración Monte Carlo secuencial y paralela (OpenMP + MPI)
+  
+
     
   </span>
+  
   
 
       </a>
@@ -203,9 +215,14 @@
   
   
   <span class="md-ellipsis">
-    Reference
+    
+  
+    Documentación
+  
+
     
   </span>
+  
   
 
       </a>
@@ -226,57 +243,25 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Tutorials
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    Tutorials
+    
+  
+    Ejemplo de uso
+  
+
     
   </span>
   
+  
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#ejemplos-de-uso" class="md-nav__link">
-    <span class="md-ellipsis">
-      Ejemplos de uso
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -299,23 +284,8 @@
   
   
   
+    
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#ejemplos-de-uso" class="md-nav__link">
-    <span class="md-ellipsis">
-      Ejemplos de uso
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -325,16 +295,144 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
 
 
 
-  <h1>Tutorials</h1>
+<h1 id="ejemplo-de-uso">Ejemplo de uso</h1>
+<p>Este documento explica cómo ejecutar, modificar y acelerar el programa de integración Monte Carlo usando sus cuatro versiones: secuencial interactiva, secuencial con argumentos, paralela con OpenMP y paralela con MPI. También incluye todos los experimentos necesarios para cumplir los milestones del proyecto.</p>
+<hr />
+<h1 id="1-version-secuencial-con-parametros-internos-montecarlo2cpp">1. Versión secuencial con parámetros internos (MonteCarlo2.cpp)</h1>
+<h2 id="compilacion">Compilación</h2>
+<pre><code class="language-bash">g++ -O3 -std=c++17 MonteCarlo2.cpp -o MonteCarlo2
+</code></pre>
+<h2 id="ejecucion">Ejecución</h2>
+<pre><code class="language-bash">./MonteCarlo2
+</code></pre>
+<h2 id="experimentos-sugeridos-milestone-1">Experimentos sugeridos (Milestone 1)</h2>
+<ul>
+<li>Modificar N en el archivo: 1e5, 1e6, 1e7.</li>
+<li>Modificar dimensiones: 2, 3, 4, ...</li>
+<li>Ejecutar y registrar:</li>
+<li>Integral estimada</li>
+<li>Varianza</li>
+<li>Error estimado</li>
+<li>Observar mejora al aumentar N.</li>
+</ul>
+<hr />
+<h1 id="2-version-secuencial-con-argumentos-montecarlocpp">2. Versión secuencial con argumentos (MonteCarlo.cpp)</h1>
+<h2 id="compilacion_1">Compilación</h2>
+<pre><code class="language-bash">g++ -O3 -std=c++17 MonteCarlo.cpp -o MonteCarlo
+</code></pre>
+<h2 id="ejecucion_1">Ejecución</h2>
+<pre><code class="language-bash">./MonteCarlo --li &lt;lim_inf&gt; --ls &lt;lim_sup&gt; --d &lt;dim&gt; --n &lt;puntos&gt;
+</code></pre>
+<h2 id="ejemplos">Ejemplos</h2>
+<pre><code class="language-bash">./MonteCarlo --li 0 --ls 1 --d 3 --n 10000
+./MonteCarlo --li 0 --ls 1 --d 3 --n 100000
+./MonteCarlo --li 0 --ls 1 --d 3 --n 1000000
+</code></pre>
+<h2 id="estudio-del-error-milestone-2">Estudio del error (Milestone 2)</h2>
+<ol>
+<li>Fijar d = 3.</li>
+<li>Probar N = 1e4, 1e5, 1e6, 1e7.</li>
+<li>Registrar el error.</li>
+<li>Graficar log(error) vs log(N).</li>
+<li>Pendiente ≈ -1/2 confirma teoría Monte Carlo.</li>
+</ol>
+<hr />
+<h1 id="3-version-con-memoria-compartida-paralelizacionmccpp">3. Versión con memoria compartida (ParalelizacionMC.cpp)</h1>
+<p>Cambios principales respecto al código secuencial:
+- Cada hilo usa su propio generador: <code>std::mt19937 gen(seed + tid * 7919);</code>
+- Se usa distribución uniforme estándar.
+- Paralelización del bucle con reducción:
+  <code>cpp
+  #pragma omp for reduction(+: suma_final, suma_final2)</code>
+- Se mide el tiempo con <code>omp_get_wtime()</code>.</p>
+<h2 id="compilacion_2">Compilación</h2>
+<pre><code class="language-bash">g++ -O3 -std=c++17 -fopenmp ParalelizacionMC.cpp -o ParalelizacionMC
+</code></pre>
+<h2 id="ejecucion-con-distinto-numero-de-hilos">Ejecución con distinto número de hilos</h2>
+<pre><code class="language-bash">export OMP_NUM_THREADS=1
+./ParalelizacionMC --li 0 --ls 1 --d 3 --n 10000000
 
-<h2 id="ejemplos-de-uso">Ejemplos de uso</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus convallis eu mauris in mollis. Aenean porta dictum lorem a convallis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam iaculis non nunc non dignissim. Praesent eu dui eu metus scelerisque aliquam. Maecenas varius sit amet diam quis lobortis. Nulla congue hendrerit magna, quis sollicitudin tellus varius a. Nam auctor quam et accumsan gravida. Vivamus ultricies neque elit, in rutrum dui scelerisque quis. Phasellus eget odio fringilla, finibus justo eget, ullamcorper nisi. Donec et ligula vel est gravida finibus id ac nibh. Integer id tincidunt nisi, vel elementum mauris. Quisque lobortis odio tortor. Integer imperdiet in nisi vitae interdum. Etiam condimentum tortor ex, ullamcorper consectetur ante venenatis in. Duis urna odio, vulputate et ante volutpat, euismod tempus arcu. </p>
+export OMP_NUM_THREADS=2
+./ParalelizacionMC --li 0 --ls 1 --d 3 --n 10000000
+
+export OMP_NUM_THREADS=4
+./ParalelizacionMC --li 0 --ls 1 --d 3 --n 10000000
+
+export OMP_NUM_THREADS=8
+./ParalelizacionMC --li 0 --ls 1 --d 3 --n 10000000
+</code></pre>
+<h2 id="escalamiento-milestone-3">Escalamiento (Milestone 3)</h2>
+<p>Calcular:
+- Speedup:<br />
+  $$ S(p) = \frac{T_1}{T_p} $$
+- Eficiencia:<br />
+  $$ E(p) = \frac{S(p)}{p} $$</p>
+<p>Registrar:
+- Tiempos
+- Speedup
+- Eficiencia
+- Número de hilos usados</p>
+<hr />
+<h1 id="4-version-con-mpi-paralelizacionmdcpp">4. Versión con MPI (ParalelizacionMD.cpp)</h1>
+<p>Cambios principales:
+- División del trabajo entre procesos usando nlocal.
+- Semilla distinta por proceso: <code>seed + rank * 1234567</code>.
+- Uso de MPI_Reduce para sumar resultados parciales:
+  <code>cpp
+  MPI_Reduce(&amp;s_local, &amp;s_global, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);</code>
+- Medición del tiempo con MPI_Wtime().</p>
+<h2 id="compilacion_3">Compilación</h2>
+<pre><code class="language-bash">mpic++ -O3 -std=c++17 ParalelizacionMD.cpp -o ParalelizacionMD
+</code></pre>
+<h2 id="ejecucion_2">Ejecución</h2>
+<pre><code class="language-bash">mpirun -np 1 ./ParalelizacionMD --li 0 --ls 1 --d 3 --n 10000000
+mpirun -np 2 ./ParalelizacionMD --li 0 --ls 1 --d 3 --n 10000000
+mpirun -np 4 ./ParalelizacionMD --li 0 --ls 1 --d 3 --n 10000000
+mpirun -np 8 ./ParalelizacionMD --li 0 --ls 1 --d 3 --n 10000000
+</code></pre>
+<h2 id="escalamiento-distribuido-milestone-4">Escalamiento distribuido (Milestone 4)</h2>
+<p>Registrar:
+- Tiempo del proceso 0.
+- Calcular speedup y eficiencia igual que OpenMP.
+- Comentar diferencias entre OpenMP y MPI:
+  - MPI escala mejor para N grandes.
+  - Para N pequeños, MPI tiene overhead significativo.</p>
+<hr />
+<h1 id="5-lista-final-de-experimentos-obligatorios">5. Lista final de experimentos obligatorios</h1>
+<h2 id="a-error-monte-carlo">(A) Error Monte Carlo</h2>
+<ul>
+<li>Ejecutar MonteCarlo2 para varios N.</li>
+<li>Graficar log(error) vs log(N).</li>
+<li>Verificar pendiente ≈ −0.5.</li>
+</ul>
+<h2 id="b-escalamiento-en-openmp">(B) Escalamiento en OpenMP</h2>
+<ul>
+<li>Fijar N grande.</li>
+<li>Probar p = 1, 2, 4, 8 hilos.</li>
+<li>Calcular speedup y eficiencia.</li>
+</ul>
+<h2 id="c-escalamiento-en-mpi">(C) Escalamiento en MPI</h2>
+<ul>
+<li>Fijar N grande.</li>
+<li>Probar np = 1, 2, 4, 8 procesos.</li>
+<li>Comparar con OpenMP.</li>
+</ul>
+<hr />
+<h1 id="6-resumen">6. Resumen</h1>
+<p>Este tutorial contiene:
+- Cómo ejecutar cada versión del programa.
+- Qué modificar para los experimentos.
+- Cómo medir tiempos.
+- Cómo obtener speedup y eficiencia.
+- Cómo verificar el comportamiento del error.
+- Qué incluir en el informe final del proyecto.</p>
 
 
 
@@ -383,10 +481,11 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
       
         <script src="../javascripts/mathjax.js"></script>
       
