@@ -1,4 +1,4 @@
-# Numerical Integration Monte Carlo
+# Integracion Numerica de Monte Carlo
 
 Este proyecto implementa y acelera la integración numérica mediante el método de **Monte Carlo**, usando:
 

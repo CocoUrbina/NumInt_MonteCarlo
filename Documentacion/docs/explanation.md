@@ -1,4 +1,4 @@
-# Explanation — Numerical Integration with Monte Carlo
+# Explicacion
 
 Este documento presenta el fundamento matemático, computacional y conceptual del proyecto.  
 Aquí se explica el método de Monte Carlo, su convergencia, la función utilizada, la estructura general del algoritmo, y se señalan los apartados donde se integrarán las extensiones del proyecto relacionadas con **memoria compartida**, **memoria distribuida** y **escalabilidad paralela**.
