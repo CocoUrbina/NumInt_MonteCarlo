@@ -539,17 +539,26 @@ double r = double(generador()) / generador.max();
 <hr />
 <h2 id="estimacion-monte-carlo">Estimación Monte Carlo</h2>
 <p>Promedio:</p>
-<div class="arithmatex">\[ `\bar`{=tex}{f} = `\frac{1}{N}`{=tex} `\sum `{=tex}f(x_i) \]</div>
+<div class="arithmatex">\[
+\bar{f} = \frac{1}{N}\sum_{i=1}^{N} f(x_i)
+\]</div>
 <p>Volumen del espacio:</p>
-<div class="arithmatex">\[ V = (`\text{ls}`{=tex}-`\text{li}`{=tex})\^d \]</div>
+<div class="arithmatex">\[
+V = (\text{ls} - \text{li})^d
+\]</div>
 <p>Integral estimada:</p>
-<div class="arithmatex">\[ I `\approx `{=tex}`\bar`{=tex}{f} `\cdot `{=tex}V \]</div>
+<div class="arithmatex">\[
+I \approx \bar{f} \cdot V
+\]</div>
 <p>Error estadístico:</p>
-<div class="arithmatex">\[ `\text{error}`{=tex} = V`\sqrt{\frac{\mathrm{Var}(f)}{N}}`{=tex} \]</div>
+<div class="arithmatex">\[
+\text{error} = V \sqrt{\frac{\mathrm{Var}(f)}{N}}
+\]</div>
 <hr />
 <h2 id="calculo-de-varianza">Cálculo de varianza</h2>
-<div class="arithmatex">\[ `\mathrm{Var}`{=tex}(f) = `\langle `{=tex}f\^2`\rangle `{=tex}-
-`\langle `{=tex}f`\rangle`{=tex}\^2 \]</div>
+<div class="arithmatex">\[
+\mathrm{Var}(f) = \langle f^2 \rangle - \langle f \rangle^2
+\]</div>
 <p>En código:</p>
 <pre><code class="language-cpp">double varianza = promedio_cuadrado - promedio * promedio;
 </code></pre>
