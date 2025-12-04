@@ -272,10 +272,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#descripcion" class="md-nav__link">
+  <a href="#uso-de-la-linea-de-comando" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Descripción
+        Uso de la línea de comando
       
     </span>
   </a>
@@ -283,10 +283,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#uso" class="md-nav__link">
+  <a href="#argumentos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Uso
+        Argumentos
       
     </span>
   </a>
@@ -294,10 +294,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parametros" class="md-nav__link">
+  <a href="#funcion-integrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Parámetros
+        Función integrada
       
     </span>
   </a>
@@ -305,10 +305,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejemplo-de-ejecucion" class="md-nav__link">
+  <a href="#generacion-de-puntos-aleatorios" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ejemplo de ejecución
+        Generación de puntos aleatorios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estimacion-monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estimación Monte Carlo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calculo-de-varianza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cálculo de varianza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impresion-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impresión final
       
     </span>
   </a>
@@ -377,10 +410,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#descripcion" class="md-nav__link">
+  <a href="#uso-de-la-linea-de-comando" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Descripción
+        Uso de la línea de comando
       
     </span>
   </a>
@@ -388,10 +421,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#uso" class="md-nav__link">
+  <a href="#argumentos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Uso
+        Argumentos
       
     </span>
   </a>
@@ -399,10 +432,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parametros" class="md-nav__link">
+  <a href="#funcion-integrada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Parámetros
+        Función integrada
       
     </span>
   </a>
@@ -410,10 +443,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejemplo-de-ejecucion" class="md-nav__link">
+  <a href="#generacion-de-puntos-aleatorios" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ejemplo de ejecución
+        Generación de puntos aleatorios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estimacion-monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estimación Monte Carlo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calculo-de-varianza" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cálculo de varianza
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impresion-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impresión final
       
     </span>
   </a>
@@ -438,47 +504,63 @@
 
 
 <h1 id="documentacion">Documentación</h1>
-<h2 id="descripcion">Descripción</h2>
-<p>Este proyecto implementa un <strong>método de integración Monte Carlo</strong> para aproximar la integral de funciones multidimensionales del tipo:</p>
-<div class="arithmatex">\[
-f(x_1, x_2, \dots, x_d) = e^{-(x_1^2 + x_2^2 + \dots + x_d^2)}
-\]</div>
-<p>dentro de un hipercubo definido por límites inferiores y superiores en cada dimensión. El programa está escrito en <strong>C++</strong> y permite al usuario especificar los límites de integración, la dimensión del espacio y la cantidad de puntos aleatorios a usar.</p>
-<p>El método Monte Carlo se basa en generar <strong>puntos aleatorios uniformemente distribuidos</strong> dentro del hipercubo y promediar las evaluaciones de la función para estimar la integral. También se calcula una estimación del error usando la varianza muestral.</p>
+<p>Documentación técnica del programa de integración Monte Carlo.</p>
+<h2 id="uso-de-la-linea-de-comando">Uso de la línea de comando</h2>
+<p>El programa se ejecuta como:</p>
+<pre><code class="language-bash">./mc --li &lt;lim_inf&gt; --ls &lt;lim_sup&gt; --d &lt;dim&gt; --n &lt;puntos&gt;
+</code></pre>
+<h2 id="argumentos">Argumentos</h2>
+<p>Argumento   Descripción</p>
 <hr />
-<h2 id="uso">Uso</h2>
-<p>El programa se ejecuta desde la línea de comandos con el siguiente formato:</p>
-<p>```bash
-./nombre_programa --li [límite inferior] --ls [límite superior] --d [dimensión] --n [número de puntos]</p>
-<h2 id="parametros">Parámetros</h2>
-<table>
-<thead>
-<tr>
-<th>Parámetro</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>--li</code></td>
-<td>Límite inferior de integración (double).</td>
-</tr>
-<tr>
-<td><code>--ls</code></td>
-<td>Límite superior de integración (double).</td>
-</tr>
-<tr>
-<td><code>--d</code></td>
-<td>Número de dimensiones (int).</td>
-</tr>
-<tr>
-<td><code>--n</code></td>
-<td>Número de puntos aleatorios a generar (int).</td>
-</tr>
-</tbody>
-</table>
-<h2 id="ejemplo-de-ejecucion">Ejemplo de ejecución</h2>
-<p>./montecarlo --li 0 --ls 1 --d 3 --n 100000</p>
+<p><code>--li</code>      Límite inferior del intervalo
+  <code>--ls</code>      Límite superior
+  <code>--d</code>       Número de dimensiones
+  <code>--n</code>       Cantidad de puntos</p>
+<p>Ejemplo:</p>
+<pre><code class="language-bash">./mc --li -2 --ls 2 --d 4 --n 500000
+</code></pre>
+<hr />
+<h2 id="funcion-integrada">Función integrada</h2>
+<pre><code class="language-cpp">double func(const std::vector&lt;double&gt;&amp; punto);
+</code></pre>
+<p>Evalúa:</p>
+<div class="arithmatex">\[ f(x) = e^{-(x_1^2 + `\dots `{=tex}+ x_d\^2)} \]</div>
+<hr />
+<h2 id="generacion-de-puntos-aleatorios">Generación de puntos aleatorios</h2>
+<p>El código usa un generador Mersenne Twister:</p>
+<pre><code class="language-cpp">std::mt19937 generador(seed);
+double r = double(generador()) / generador.max();
+</code></pre>
+<p>Luego escala el número uniforme al intervalo:</p>
+<pre><code class="language-cpp">punto[d] = lim_inf + (lim_sup - lim_inf) * r;
+</code></pre>
+<hr />
+<h2 id="estimacion-monte-carlo">Estimación Monte Carlo</h2>
+<p>Promedio:</p>
+<div class="arithmatex">\[ `\bar`{=tex}{f} = `\frac{1}{N}`{=tex} `\sum `{=tex}f(x_i) \]</div>
+<p>Volumen del espacio:</p>
+<div class="arithmatex">\[ V = (`\text{ls}`{=tex}-`\text{li}`{=tex})\^d \]</div>
+<p>Integral estimada:</p>
+<div class="arithmatex">\[ I `\approx `{=tex}`\bar`{=tex}{f} `\cdot `{=tex}V \]</div>
+<p>Error estadístico:</p>
+<div class="arithmatex">\[ `\text{error}`{=tex} = V`\sqrt{\frac{\mathrm{Var}(f)}{N}}`{=tex} \]</div>
+<hr />
+<h2 id="calculo-de-varianza">Cálculo de varianza</h2>
+<div class="arithmatex">\[ `\mathrm{Var}`{=tex}(f) = `\langle `{=tex}f\^2`\rangle `{=tex}-
+`\langle `{=tex}f`\rangle`{=tex}\^2 \]</div>
+<p>En código:</p>
+<pre><code class="language-cpp">double varianza = promedio_cuadrado - promedio * promedio;
+</code></pre>
+<hr />
+<h2 id="impresion-final">Impresión final</h2>
+<p>El programa muestra:</p>
+<ul>
+<li>integral estimada\</li>
+<li>error\</li>
+<li>varianza\</li>
+<li>escala del error</li>
+</ul>
+<p>Todo esto en un formato claro para el usuario.</p>
 
 
 
